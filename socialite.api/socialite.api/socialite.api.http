@@ -1,0 +1,6 @@
+@socialite.api_HostAddress = http://localhost:5239
+
+GET {{socialite.api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

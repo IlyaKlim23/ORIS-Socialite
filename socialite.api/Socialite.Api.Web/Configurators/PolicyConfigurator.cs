@@ -23,7 +23,13 @@ public static class PolicyConfigurator
             new PolicyModel(PolicyConstants.IsDefaultUser)
                 .AddRoles(
                     Roles.Administrator,
-                    Roles.User)
+                    Roles.PremiumUser,
+                    Roles.User),
+            
+            new PolicyModel(PolicyConstants.IsPremiumUser)
+                .AddRoles(
+                    Roles.Administrator,
+                    Roles.PremiumUser)
             );
     }
 

@@ -14,4 +14,9 @@ public static class Roles
     /// Обычный пользователь
     /// </summary>
     public const string User = "User";
+
+    /// <summary>
+    /// Премиум пользователь
+    /// </summary>
+    public const string PremiumUser = "PremiumUser";
 }

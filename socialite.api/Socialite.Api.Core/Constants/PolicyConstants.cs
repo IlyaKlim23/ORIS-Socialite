@@ -14,4 +14,9 @@ public static class PolicyConstants
     /// Является обычным пользователем
     /// </summary>
     public const string IsDefaultUser = "is_default_user";
+    
+    /// <summary>
+    /// Является премиум пользователем
+    /// </summary>
+    public const string IsPremiumUser = "is_premium_user";
 }

@@ -1,7 +1,9 @@
-import './App.css';
+import Sidebar from "./Components/Sidebar";
 
-function App() {
-  return 1;
+function App(){
+    return (
+        <Sidebar />
+    );
 }
 
 export default App;

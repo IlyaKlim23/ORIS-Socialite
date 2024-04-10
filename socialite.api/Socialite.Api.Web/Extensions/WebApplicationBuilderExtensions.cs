@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Interfaces;
+using Socialite.Api.Core.Services;
 using Socialite.Api.Db;
 using Socialite.Api.Web.Configurators;
 using Socialite.Api.Web.Constants;
@@ -46,11 +47,12 @@ public static class WebApplicationBuilderExtensions
     /// <param name="builder">WebApplicationBuilder</param>
     public static void ConfigureCore(this WebApplicationBuilder builder)
     {
-        builder.Services.AddMediatR(typeof(User));
         builder.Services.AddScoped<IDbContext, EfContext>();
-        // builder.Services.AddScoped<IUserService, UserService>();
-        // builder.Services.AddSingleton<IJwtService, JwtService>();
-        // builder.Services.AddScoped<IRoleService, RoleService>();
+        builder.Services.AddMediatR(typeof(EntityBase).Assembly);
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddSingleton<IJwtService, JwtService>();
+        builder.Services.AddScoped<IRoleService, RoleService>();
+        builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
         builder.Services
             .AddIdentity<User, Role>(opt =>
             {
@@ -142,7 +144,7 @@ public static class WebApplicationBuilderExtensions
                     Scheme = "Bearer",
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme

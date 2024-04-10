@@ -29,6 +29,10 @@ public class UserService: IUserService
         => await _userManager.FindByIdAsync(guid.ToString());
 
     /// <inheritdoc />
+    public IQueryable<User> GetUsersAsQueryable()
+        => _userManager.Users;
+    
+    /// <inheritdoc />
     public async Task<IdentityResult> RegisterUserAsync(User user, string password)
         => await _userManager.CreateAsync(user, password);
 

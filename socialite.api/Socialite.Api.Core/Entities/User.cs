@@ -10,7 +10,20 @@ public class User: IdentityUser<Guid>
 {
     private string _firstName;
     private string _lastName;
-    
+
+    /// <summary>
+    /// Конструктор
+    /// </summary>
+    public User(
+        string firstName,
+        string lastName)
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Subscribers = new List<User>();
+        SubscribedTo = new List<User>();
+    }
+
     /// <summary>
     /// Имя
     /// </summary>
@@ -50,4 +63,14 @@ public class User: IdentityUser<Guid>
     /// Статус
     /// </summary>
     public string? Status { get; set; }
+
+    /// <summary>
+    /// Подписчики
+    /// </summary>
+    public List<User> Subscribers { get; set; }
+
+    /// <summary>
+    /// Пользователи, на которых подписан текущий пользователь
+    /// </summary>
+    public List<User> SubscribedTo { get; set; }
 }

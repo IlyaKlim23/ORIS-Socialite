@@ -10,7 +10,7 @@ namespace Socialite.Api.Core.Interfaces;
 public interface IUserService
 {
     /// <summary>
-    /// Зарегестрировать пользователя
+    /// Зарегистрировать пользователя
     /// </summary>
     /// <param name="user">Пользователь</param>
     /// <param name="password">Пароль</param>
@@ -18,7 +18,7 @@ public interface IUserService
     public Task<IdentityResult> RegisterUserAsync(User user, string password);
 
     /// <summary>
-    /// Зарегестрировать пользователя
+    /// Зарегистрировать пользователя
     /// </summary>
     /// <param name="user">Пользователь</param>
     /// <returns></returns>
@@ -30,6 +30,12 @@ public interface IUserService
     /// <param name="guid"></param>
     /// <returns></returns>
     public Task<User?> FindUserByIdAsync(Guid guid);
+
+    /// <summary>
+    /// Получить пользователей как IQueryable
+    /// </summary>
+    /// <returns>IQueryable</returns>
+    public IQueryable<User> GetUsersAsQueryable();
 
     /// <summary>
     /// Добавить связь пользователя с ролью

@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socialite.Api.Db", "Sociali
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socialite.Api.Core", "Socialite.Api.Core\Socialite.Api.Core.csproj", "{8CC42A00-33E8-4F41-8F47-58024DE6FDFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Socialite.Api.Contracts", "Socialite.Api.Contracts\Socialite.Api.Contracts.csproj", "{ED096CE1-42CE-458D-9F13-A44B093D1C5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,10 +28,15 @@ Global
 		{8CC42A00-33E8-4F41-8F47-58024DE6FDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC42A00-33E8-4F41-8F47-58024DE6FDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC42A00-33E8-4F41-8F47-58024DE6FDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED096CE1-42CE-458D-9F13-A44B093D1C5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED096CE1-42CE-458D-9F13-A44B093D1C5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED096CE1-42CE-458D-9F13-A44B093D1C5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED096CE1-42CE-458D-9F13-A44B093D1C5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CC0D1762-C76D-4C6C-881C-B0608DF9EEBC} = {E84EA15D-27CE-44A2-B1D9-B4C17591BE26}
 		{660A0B7A-7DEB-4CCD-A31C-B77A46F18CF2} = {E84EA15D-27CE-44A2-B1D9-B4C17591BE26}
 		{8CC42A00-33E8-4F41-8F47-58024DE6FDFE} = {E84EA15D-27CE-44A2-B1D9-B4C17591BE26}
+		{ED096CE1-42CE-458D-9F13-A44B093D1C5B} = {E84EA15D-27CE-44A2-B1D9-B4C17591BE26}
 	EndGlobalSection
 EndGlobal

@@ -25,6 +25,9 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
             .IsRequired()
             .HasDefaultValueSql(GuidCommand);
         
+        builder.Property(p => p.UserName)
+            .HasComment("Никнейм");
+        
         builder.Property(p => p.FirstName)
             .HasComment("Имя");
         
@@ -45,5 +48,11 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
         
         builder.Property(p => p.Status)
             .HasComment("Статус");
+        
+        builder.HasMany(x => x.Subscribers)
+            .WithMany(x => x.SubscribedTo)
+            .UsingEntity(builder =>
+                builder.ToTable("user_subscriber", "public")
+                    .HasComment("Пользователь-Подписчик"));
     }
 }

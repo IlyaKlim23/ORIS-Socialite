@@ -6,11 +6,40 @@
   <component name="ChangeListManager">
     <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/tailwind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/code.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/code.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/components.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/components.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/form-login.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/form-login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/form-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/form-register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/funding.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/funding.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/feed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/setting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/single.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-event.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-event.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-funding.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-funding.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-group.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/upgrade.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/upgrade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -23,16 +52,20 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2epSKGQ600h9gByV7BHSIy0FQdJ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/.NET-Semistry/mouse-front",
+    "last_opened_file_path": "C:/ORIS-Socialite/socialite.web/src/Pages/Register",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -44,6 +77,21 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Register" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Constants" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Api" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\SignIn" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ORIS-Socialite\socialite.web\public" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Register" />
+      <recent name="C:\ORIS-Socialite\socialite.web\public\assets" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\SignIn" />
+    </key>
+  </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
@@ -72,6 +120,7 @@
       <workItem from="1712729173652" duration="14000" />
       <workItem from="1712729667576" duration="652000" />
       <workItem from="1712747350415" duration="805000" />
+      <workItem from="1712764407382" duration="7126000" />
     </task>
     <servers />
   </component>

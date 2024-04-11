@@ -8,11 +8,11 @@ export function isValidSignInData(data){
     return isValidEmail(data.email) && isValidPassword(data.password)
 }
 
-function isValidEmail(email){
+export function isValidEmail(email){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
-function isValidPassword(password){
+export function isValidPassword(password){
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);
     return password!=='' && hasLowerCase && hasUpperCase && password.length>=6

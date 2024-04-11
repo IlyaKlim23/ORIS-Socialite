@@ -2,22 +2,26 @@ import {registration} from "../../Constants/PagePaths"
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {processSignIn} from "./SignInService";
+import {AlertError} from "../../Components/AlertError";
+import {feed} from "../../Constants/PagePaths"
 
-export default function SignIn(){
+export default function SignIn() {
     const [signInData, setSignInData] = useState({
         email: "",
         password: "",
     });
+    let errorText = "";
+    const [textForAlert, setTextForAlert] = useState("")
     const navigate = useNavigate();
-    function onFormSubmit(event) {
+    async function onFormSubmit(event) {
         event.preventDefault();
-        processSignIn(signInData)
-            .then(() => {
-                navigate("/");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        errorText = await processSignIn(signInData)
+        if (errorText === ""){
+            navigate(feed)
+        }
+        else{
+            setTextForAlert(errorText)
+        }
     }
 
     return(
@@ -63,7 +67,8 @@ export default function SignIn(){
                             </div>
                             <div>
                                 <button type="button" onClick={onFormSubmit} className="button bg-primary text-white w-full">Sign in</button>
-                            </div>
+                                </div>
+                            <div>{AlertError(textForAlert)}</div>
                         </form>
                     </div>
                 </div>

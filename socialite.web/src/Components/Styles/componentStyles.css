@@ -1,0 +1,29 @@
+
+
+.errorAlert{
+    position: relative;
+    top: 10px;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    margin: 10px;
+    line-height: 1.8;
+    border-radius: 5px;
+    cursor: hand;
+    font-family: sans-serif;
+    font-weight: 400;
+}
+
+.error {
+    background-color: #FEE;
+    border: 1px solid #EDD;
+    color: #A66;
+}
+
+.alertText {
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+}

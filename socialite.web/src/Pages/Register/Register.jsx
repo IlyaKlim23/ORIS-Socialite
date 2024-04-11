@@ -2,6 +2,8 @@ import {signIn} from "../../Constants/PagePaths"
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import processRegistration from "./RegistrationService";
+import {feed} from "../../Constants/PagePaths"
+import {AlertError} from "../../Components/AlertError";
 
 export default function Register(){
     const [registrationData, setRegistrationData] = useState({
@@ -11,6 +13,7 @@ export default function Register(){
         email: "",
         password: "",
     });
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setRegistrationData((prevData) => ({
@@ -18,26 +21,27 @@ export default function Register(){
             [name]: value,
         }));
     };
+
+    let errorText = "";
+    const [textForAlert, setTextForAlert] = useState("")
     const navigate = useNavigate();
-    function onRegistrationSubmit(event) {
+    async function onRegistrationSubmit(event) {
         event.preventDefault();
-        processRegistration(registrationData)
-            .then((result) => {
-                result && navigate("/");
-                console.log(result);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        errorText = await processRegistration(registrationData)
+        if (errorText === ""){
+            navigate(feed)
+        }
+        else{
+            setTextForAlert(errorText)
+        }
+
     }
 
     return(
         <>
             <div className="sm:flex">
-
                 <div
                     className="relative lg:w-[580px] md:w-96 w-full p-10 min-h-screen bg-white shadow-xl flex items-center pt-10 dark:bg-slate-900 z-10">
-
                     <div className="w-full lg:max-w-sm mx-auto space-y-10"
                          uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
 
@@ -115,6 +119,7 @@ export default function Register(){
                                             className="button bg-primary text-white w-full">Get Started
                                     </button>
                                 </div>
+                                <div className="col-span-2">{AlertError(textForAlert)}</div>
 
                             </div>
                         </form>

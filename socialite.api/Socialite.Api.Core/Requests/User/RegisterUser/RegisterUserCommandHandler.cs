@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using MediatR;
 using Socialite.Api.Contracts.Requests.User.RegisterUser;
 using Socialite.Api.Core.Constants;
@@ -15,6 +16,7 @@ public class RegisterUserCommandHandler
     : IRequestHandler<RegisterUserCommand, RegisterUserResponse>
 {
     private readonly IUserService _userService;
+    private static readonly Regex _isLatinRegex = new (@"\p{IsBasicLatin}");
 
     /// <summary>
     /// Конструктор
@@ -31,6 +33,9 @@ public class RegisterUserCommandHandler
         RegisterUserCommand request, 
         CancellationToken cancellationToken)
     {
+        if (!_isLatinRegex.IsMatch(request.UserName))
+            throw new ValidationException("Никнейм пользователя должен быть на английском языке");
+        
         var isUserExist = await _userService.FindUserByEmailAsync(request.Email);
         if (isUserExist != null)
             throw new ValidationException("Пользователь с данной почтой уже существует");  

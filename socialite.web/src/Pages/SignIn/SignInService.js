@@ -9,6 +9,6 @@ export async function processSignIn(signInData) {
     return "Формат почты неверен"
   }
   else{
-    return "Пароль должен содержать заглавные и строчные символы, а также цифры. Длина пароля от 6 символов"
+    return "Неверный формат пароля"
   }
 }

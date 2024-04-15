@@ -1,4 +1,7 @@
-﻿namespace Socialite.Api.Core.Interfaces;
+﻿using Socialite.Api.Core.Entities;
+using File = Socialite.Api.Core.Entities.File;
+
+namespace Socialite.Api.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>
@@ -6,6 +9,21 @@ using Microsoft.EntityFrameworkCore;
 /// </summary>
 public interface IDbContext
 {
+    /// <summary>
+    /// Файлы
+    /// </summary>
+    public DbSet<File> Files { get; set; }
+
+    /// <summary>
+    /// Посты
+    /// </summary>
+    public DbSet<Post> Posts { get; set; }
+
+    /// <summary>
+    /// Комментарии
+    /// </summary>
+    public DbSet<Comment> Comments { get; set; }
+    
     /// <summary>
     /// Сохранить изменения в БД
     /// </summary>

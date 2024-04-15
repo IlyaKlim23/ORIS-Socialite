@@ -9,7 +9,7 @@ export default async function processRegistration(registrationData) {
         return "Формат почты неверен"
     }
     else if (!isValidPassword(registrationData.password)){
-        return "Пароль должен содержать заглавные и строчные символы, а также цифры. Длина пароля от 6 символов"
+        return "Пароль должен содержать символы A-Z, a-z и 0-9. Минимальная длина пароля 6 символов"
     }
     else return ("Невалидные данные");
 }

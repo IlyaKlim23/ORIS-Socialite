@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Interfaces;
 using Socialite.Api.Db.Extensions;
+using File = Socialite.Api.Core.Entities.File;
 
 namespace Socialite.Api.Db;
 
@@ -30,7 +31,16 @@ public class EfContext: IdentityDbContext<User, Role, Guid>, IDbContext
         modelBuilder.Seed();
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfContext).Assembly);
     }
-    
+
+    /// <inheritdoc />
+    public DbSet<File> Files { get; set; }
+
+    /// <inheritdoc />
+    public DbSet<Post> Posts { get; set; }
+
+    /// <inheritdoc />
+    public DbSet<Comment> Comments { get; set; }
+
     /// <inheritdoc />
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
         await SaveChangesAsync(true, cancellationToken);

@@ -49,6 +49,30 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
         builder.Property(p => p.Status)
             .HasComment("Статус");
         
+        builder.HasOne(x => x.Avatar)
+            .WithMany(x => x.Users)
+            .HasForeignKey(x => x.AvatarId)
+            .HasPrincipalKey(x => x.Id)
+            .OnDelete(DeleteBehavior.ClientCascade);
+
+        builder.HasMany(x => x.CreatedPosts)
+            .WithOne(x => x.Owner)
+            .HasForeignKey(x => x.OwnerId)
+            .HasPrincipalKey(x => x.Id)
+            .OnDelete(DeleteBehavior.ClientCascade);
+
+        builder.HasMany(x => x.Comments)
+            .WithOne(x => x.Owner)
+            .HasForeignKey(x => x.OwnerId)
+            .HasPrincipalKey(x => x.Id)
+            .OnDelete(DeleteBehavior.ClientCascade);
+
+        builder.HasMany(x => x.LikedPosts)
+            .WithMany(x => x.LikedUsers)
+            .UsingEntity(builder =>
+                builder.ToTable("user_likedPosts", "public")
+                    .HasComment("Пользователь-Лайкнутые Посты"));
+        
         builder.HasMany(x => x.Subscribers)
             .WithMany(x => x.SubscribedTo)
             .UsingEntity(builder =>

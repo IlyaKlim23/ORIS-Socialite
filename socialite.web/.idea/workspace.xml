@@ -5,10 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="[WEB] auth system">
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Interfaces/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Interfaces/IUserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Services/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Services/UserService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Configuration/UserConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Configuration/UserConfiguration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Migrations/EfContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Migrations/EfContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/socialite.web.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/socialite.web.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/feed.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/feed.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Register/RegistrationService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Register/RegistrationService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/SignIn/SignInService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SignIn/SignInService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/tailwind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/images/icons/home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/feed.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/funding.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/funding.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/messages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/setting.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/setting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/single.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/single.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/upgrade.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/upgrade.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants/AxiosClients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/AxiosClients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants/PagePaths.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/PagePaths.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,9 +40,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -58,24 +79,25 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
     "npm.npm start.executor": "Run",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "C:\\Users\\klimk\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Sources\Images\Avatars" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Register" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Constants" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Api" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\SignIn" />
-      <recent name="C:\ORIS-Socialite\socialite.web\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Profile" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Sources\Images\Icons" />
+      <recent name="C:\ORIS-Socialite\socialite.web\public\assets\images\icons" />
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Feed" />
       <recent name="C:\ORIS-Socialite\socialite.web\public" />
-      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Register" />
-      <recent name="C:\ORIS-Socialite\socialite.web\public\assets" />
-      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\SignIn" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -112,7 +134,17 @@
       <workItem from="1712924062075" duration="12000" />
       <workItem from="1713178372019" duration="340000" />
       <workItem from="1713178989065" duration="2018000" />
-      <workItem from="1713182338404" duration="2199000" />
+      <workItem from="1713182338404" duration="2950000" />
+      <workItem from="1713251866526" duration="254000" />
+      <workItem from="1713252505306" duration="610000" />
+      <workItem from="1713254326245" duration="3603000" />
+      <workItem from="1713264926583" duration="627000" />
+      <workItem from="1713266935181" duration="6940000" />
+      <workItem from="1713274299033" duration="1634000" />
+      <workItem from="1713278470986" duration="32000" />
+      <workItem from="1713437884396" duration="4211000" />
+      <workItem from="1713448645102" duration="6671000" />
+      <workItem from="1713462647102" duration="2315000" />
     </task>
     <task id="LOCAL-00001" summary="[WEB] auth">
       <option name="closed" value="true" />

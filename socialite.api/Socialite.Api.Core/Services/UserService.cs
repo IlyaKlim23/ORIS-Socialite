@@ -37,6 +37,10 @@ public class UserService: IUserService
         => await _userManager.CreateAsync(user, password);
 
     /// <inheritdoc />
+    public IQueryable<User> Users()
+        => _userManager.Users;
+
+    /// <inheritdoc />
     public async Task<IdentityResult> RegisterUserAsync(User user)
         => await _userManager.CreateAsync(user);
 

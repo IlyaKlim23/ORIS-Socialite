@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Minio;
 using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Interfaces;
 using Socialite.Api.Core.Services;
 using Socialite.Api.Db;
+using Socialite.Api.S3.Interfaces;
+using Socialite.Api.S3.Services;
 using Socialite.Api.Web.Configurators;
 using Socialite.Api.Web.Constants;
 using Socialite.Api.Web.Middlewares;
@@ -51,8 +54,20 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddMediatR(typeof(EntityBase).Assembly);
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddSingleton<IJwtService, JwtService>();
+        builder.Services.AddSingleton<IS3Service, S3Service>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
+        builder.Services.AddMinio(
+            c =>
+            {
+                c.WithEndpoint(builder.Configuration["S3:Url"]);
+                c.WithCredentials(
+                    builder.Configuration["S3:AccessKey"],
+                    builder.Configuration["S3:SecretKey"]);
+                c.WithSSL(false);
+            }
+        
+            );
         builder.Services
             .AddIdentity<User, Role>(opt =>
             {

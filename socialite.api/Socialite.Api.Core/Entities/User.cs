@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Socialite.Api.Core.Enums;
+using Socialite.Api.Contracts.Enums;
 using Socialite.Api.Core.Exceptions;
+using Genders = Socialite.Api.Core.Enums.Genders;
 
 namespace Socialite.Api.Core.Entities;
 
@@ -65,6 +66,11 @@ public class User: IdentityUser<Guid>
     public string? PlaceOfStudy { get; set; }
 
     /// <summary>
+    /// Семейное положение
+    /// </summary>
+    public MaritalStatuses? MaritalStatus { get; set; }
+    
+    /// <summary>
     /// Статус
     /// </summary>
     public string? Status { get; set; }
@@ -113,7 +119,7 @@ public class User: IdentityUser<Guid>
     public List<Post> LikedPosts { get; set; }
 
     /// <summary>
-    /// Комментарии
+    /// Созданные комментарии
     /// </summary>
     public List<Comment> Comments { get; set; }
 }

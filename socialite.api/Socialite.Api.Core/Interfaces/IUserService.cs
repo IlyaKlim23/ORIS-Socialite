@@ -18,6 +18,12 @@ public interface IUserService
     public Task<IdentityResult> RegisterUserAsync(User user, string password);
 
     /// <summary>
+    /// Получить пользователей в виде IQueryable
+    /// </summary>
+    /// <returns></returns>
+    public IQueryable<User> Users();
+
+    /// <summary>
     /// Зарегистрировать пользователя
     /// </summary>
     /// <param name="user">Пользователь</param>

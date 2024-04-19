@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <InvariantGlobalization>true</InvariantGlobalization>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <UserSecretsId>eb5f51a6-2c68-4abf-b6be-de9c6c862557</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -21,6 +22,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Minio" Version="6.0.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
@@ -28,6 +30,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Socialite.Api.Contracts\Socialite.Api.Contracts.csproj" />
       <ProjectReference Include="..\Socialite.Api.Db\Socialite.Api.Db.csproj" />
+      <ProjectReference Include="..\Socialite.Api.S3\Socialite.Api.S3.csproj" />
     </ItemGroup>
 
 </Project>

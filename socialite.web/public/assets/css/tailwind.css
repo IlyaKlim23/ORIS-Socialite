@@ -6060,9 +6060,19 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgb(15 23 42 / var(--tw-bg-opacity));
   }
 
+  .dark\:bg-dark15 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(23 31 49 / var(--tw-bg-opacity));
+  }
+
   .dark\:bg-dark2 {
     --tw-bg-opacity: 1;
     background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-dark25 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(40 52 70 / var(--tw-bg-opacity));
   }
 
   .dark\:bg-dark3 {

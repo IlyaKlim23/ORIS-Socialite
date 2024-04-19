@@ -1,8 +1,12 @@
+import {feed} from "../Constants/PagePaths";
+import feedLogo from "../Sources/Images/Icons/home.png"
+import messagesLogo from "../Sources/Images/Icons/messages.png"
+
 function Sidebar() {
     return(
         <>
             <div id="site__sidebar"
-                 className="fixed top-0 left-0 z-[99] pt-[--m-top] overflow-hidden transition-transform xl:duration-500 max-xl:w-full max-xl:-translate-x-full">
+                 className="fixed top-0 left-0 z-[99] pt-[--m-top] bg-white/10 overflow-hidden transition-transform xl:duration-500 dark:bg-dark15 max-xl:w-full max-xl:-translate-x-full">
                 <div
                     className="p-2 max-xl:bg-white shadow-sm 2xl:w-72 sm:w-64 w-[80%] h-[calc(100vh-64px)] relative z-30 max-lg:border-r dark:max-xl:!bg-slate-700 dark:border-slate-700">
 
@@ -12,14 +16,14 @@ function Sidebar() {
 
                             <ul>
                                 <li className="active">
-                                    <a href="index.html">
-                                        <img src="assets/images/icons/home.png" alt="feeds" className="w-6"/>
+                                    <a href={feed}>
+                                        <img src={feedLogo} alt="feeds" className="w-6"/>
                                         <span> Feed </span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="messages.html">
-                                        <img src="assets/images/icons/message.png" alt="messages" className="w-5"/>
+                                        <img src={messagesLogo} alt="messages" className="w-6"/>
                                         <span> messages </span>
                                     </a>
                                 </li>

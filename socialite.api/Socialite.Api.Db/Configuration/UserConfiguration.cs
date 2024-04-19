@@ -45,9 +45,15 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
         
         builder.Property(p => p.PlaceOfStudy)
             .HasComment("Место учебы");
+
+        builder.Property(p => p.MaritalStatus)
+            .HasComment("Семейное положение");
         
         builder.Property(p => p.Status)
             .HasComment("Статус");
+        
+        builder.Property(p => p.Gender)
+            .HasComment("Гендер");
         
         builder.HasOne(x => x.Avatar)
             .WithMany(x => x.Users)

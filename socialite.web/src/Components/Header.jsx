@@ -1,7 +1,21 @@
 import {profile} from "../Constants/PagePaths";
 import {SmallAvatar} from "../Constants/Images/Avatars";
+import {useEffect, useState} from "react";
+import CurrentUserInfoAsync from "../CommonServices/CurrentUserInfo";
 
 function Header(){
+    const [userInfo, setUserInfo] = useState({})
+
+    async function loadProfile(){
+        const result = await CurrentUserInfoAsync()
+        setUserInfo(result)
+    }
+
+    useEffect(() => {
+        loadProfile()
+    }, []);
+
+
     return(
         <>
             <header
@@ -111,7 +125,7 @@ function Header(){
                                               clip-rule="evenodd"/>
                                     </svg>
                                     <div
-                                        className="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">Count
+                                        className="absolute top-0 right-0 -m-1 bg-red-600 text-white text-xs px-1 rounded-full">1
                                     </div>
                                 </button>
                                 <div
@@ -258,7 +272,7 @@ function Header(){
 
                                 {/* profile */}
                                 <div className="rounded-full relative bg-secondery cursor-pointer shrink-0">
-                                    <img src={SmallAvatar} alt=""
+                                    <img src={userInfo?.avatar ? userInfo.avatar : SmallAvatar} alt=""
                                          className="sm:w-9 sm:h-9 w-7 h-7 rounded-full shadow shrink-0"/>
                                 </div>
                                 <div
@@ -267,12 +281,12 @@ function Header(){
 
                                     <a href={profile}>
                                         <div className="p-4 py-5 flex items-center gap-4">
-                                            <img src={SmallAvatar} alt=""
+                                            <img src={userInfo?.avatar ? userInfo.avatar : SmallAvatar} alt=""
                                                  className="w-10 h-10 rounded-full shadow"/>
                                             <div className="flex-1">
-                                                <h4 className="text-sm font-medium text-black">Stell johnson</h4>
+                                                <h4 className="text-sm font-medium text-black">{userInfo?.userData?.firstName} {userInfo?.userData?.lastName}</h4>
                                                 <div
-                                                    className="text-sm mt-1 text-blue-600 font-light dark:text-white/70">@mohnson
+                                                    className="text-sm mt-1 text-blue-600 font-light dark:text-white/70">@{userInfo?.userData?.userName}
                                                 </div>
                                             </div>
                                         </div>

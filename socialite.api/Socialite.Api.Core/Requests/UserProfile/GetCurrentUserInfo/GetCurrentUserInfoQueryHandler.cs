@@ -47,6 +47,7 @@ public class GetCurrentUserInfoQueryHandler : IRequestHandler<GetCurrentUserInfo
             Status = userInfo.User.Status,
             Gender = userInfo.User.Gender?.GetDescription(),
             SubscribersCount = userInfo.SubscribersCount,
+            AvatarId = userInfo.User.AvatarId,
         };
     }
 }

@@ -2,28 +2,83 @@ import Sidebar from "../../Components/Sidebar";
 import Header from "../../Components/Header";
 import {SmallAvatar} from "../../Constants/Images/Avatars";
 import {useEffect, useState} from "react";
-import GetCurrentUserInfo from "../../Api/UserInfo/GetCurrentUserInfo";
-
+import './style/profile.css'
+import UploadFile from "../../Api/StaticFiles/UploadFile";
+import UpdateUserInfo from "../../Api/UserInfo/UpdateUserInfo";
+import CurrentUserInfoAsync from "../../CommonServices/CurrentUserInfo";
 
 export default function Profile(){
     const [userData, setUserData] = useState({});
+    const [avatar, setAvatar] = useState('');
 
     async function loadProfile(){
-        const response = await GetCurrentUserInfo();
-        if (response) {
-            setUserData(response.data);
+        const result = await CurrentUserInfoAsync()
+        setUserData(result?.userData)
+        setAvatar(result?.avatar)
+    }
+
+    async function uploadAvatarInServer(file){
+        const response = await UploadFile(file)
+        if (response?.data?.files){
+            const avatarId = Object.values(response?.data?.files)[0]
+            if (avatarId)
+            {
+                const avatarChange = await UpdateUserInfo({
+                    avatarId: avatarId,
+                    status: userData.status,
+                    placeOfLiving: userData.placeOfLiving,
+                    placeOfWork: userData.placeOfWork,
+                    placeOfStudy: userData.placeOfStudy,
+                    maritalStatus: userData.maritalStatus
+                })
+                if (avatarChange){
+                    await loadProfile()
+                    // eslint-disable-next-line no-restricted-globals
+                    location.reload()
+                }
+            }
         }
+    }
+
+    const setNewAvatar = () => {
+        document.getElementById('file').click()
     };
+
+    async function onChangeStatus(){
+        const text = document.getElementById('profile_status_textarea').value
+        const statusChange = await UpdateUserInfo({
+            avatarId: userData.avatarId,
+            status: text,
+            placeOfLiving: userData.placeOfLiving,
+            placeOfWork: userData.placeOfWork,
+            placeOfStudy: userData.placeOfStudy,
+            maritalStatus: userData.maritalStatus,
+        })
+        if (statusChange)
+            await loadProfile()
+    }
+
+    async function onChangeIntro(){
+        const introChange = await UpdateUserInfo({
+            avatarId: userData.avatarId,
+            status: userData.status,
+            placeOfLiving: document.getElementById('living_place_input').value,
+            placeOfWork: document.getElementById('working_place_input').value,
+            placeOfStudy: document.getElementById('studying_place_input').value,
+            maritalStatus: document.getElementById('marital-status-input').value,
+        })
+        if (introChange)
+            await loadProfile()
+    }
 
     useEffect(() => {
         loadProfile()
     }, []);
 
-
     return (
         <>
-            <Sidebar />
-            <Header />
+            <Sidebar/>
+            <Header/>
             <div id="wrapper">
                 <div id="sidebar"></div>
                 {/* main contents */}
@@ -47,21 +102,29 @@ export default function Profile(){
 
                                 <div className="flex flex-col justify-center md:items-center lg:-mt-48 -mt-28">
 
-                                    <div className="relative lg:h-48 lg:w-48 w-28 h-28 mb-4 z-10">
+                                    <div className="relative mb-4 z-10">
                                         <div
                                             className="relative overflow-hidden rounded-full md:border-[6px] border-gray-100 shrink-0 dark:border-slate-900 shadow">
-                                            <img src={SmallAvatar} alt=""
-                                                 className="h-full w-full object-cover inset-0"/>
+                                            <img src={avatar ? avatar : SmallAvatar} alt=""
+                                                 className="cropped"/>
                                         </div>
+                                        <input type='file' id='file'
+                                               onChange={e => uploadAvatarInServer(e.target.files[0])}
+                                               style={{display: "none"}}></input>
                                         <button type="button"
+                                                onClick={setNewAvatar}
                                                 className="absolute -bottom-3 left-1/2 -translate-x-1/2 dark:bg-dark15 shadow p-1.5 rounded-full sm:flex hidden">
-                                            <ion-icon name="camera" className="text-2xl md hydrated" role="img" aria-label="camera"></ion-icon>
+                                            <ion-icon name="camera" className="text-2xl md hydrated" role="img"
+                                                      aria-label="camera"></ion-icon>
                                         </button>
                                     </div>
 
                                     <h3 className="md:text-3xl text-base font-bold text-black dark:text-white"> {userData.firstName} {userData.lastName} </h3>
 
-                                    <p className="mt-2 text-gray-500 dark:text-white/80">{userData.status}&nbsp;&nbsp;<a href="#" className="text-blue-500 inline-block"> {userData.status ? "Edit" : "You haven't status. Edit?"} </a></p>
+                                    <p className="mt-2 text-gray-500 dark:text-white/80">{userData.status}&nbsp;&nbsp;<a
+                                        href="#" className="text-blue-500 inline-block"
+                                        uk-toggle="target: #change-profile-status"> {userData.status ? "Edit" : "You haven't status. Edit?"} </a>
+                                    </p>
 
                                     <p className="mt-2 max-w-xl text-sm md:font-normal font-light text-center hidden"> I
                                         love beauty and emotion. 🥰 I’m passionate about photography and learning. 📚 I
@@ -127,34 +190,6 @@ export default function Profile(){
                                             <div className="py-2.5 text-center dark:text-white"> What do you have in
                                                 mind?
                                             </div>
-                                        </div>
-                                        <div
-                                            className="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-lg transition-all bg-pink-100/60 hover:bg-pink-100"
-                                            uk-toggle="target: #create-status">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 className="w-8 h-8 stroke-pink-600 fill-pink-200/70"
-                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none"
-                                                 stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path d="M15 8h.01"/>
-                                                <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"/>
-                                                <path d="M3.5 15.5l4.5 -4.5c.928 -.893 2.072 -.893 3 0l5 5"/>
-                                                <path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l2.5 2.5"/>
-                                            </svg>
-                                        </div>
-                                        <div
-                                            className="cursor-pointer hover:bg-opacity-80 p-1 px-1.5 rounded-lg transition-all bg-sky-100/60 hover:bg-sky-100"
-                                            uk-toggle="target: #create-status">
-                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                 className="w-8 h-8 stroke-sky-600 fill-sky-200/70 " viewBox="0 0 24 24"
-                                                 stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round"
-                                                 stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                                <path
-                                                    d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"/>
-                                                <path
-                                                    d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"/>
-                                            </svg>
                                         </div>
                                     </div>
 
@@ -455,7 +490,7 @@ export default function Profile(){
 
                                         <div className="flex items-ce justify-between text-black dark:text-white">
                                             <h3 className="font-bold text-lg"> Intro </h3>
-                                            <a href="#" className="text-sm text-blue-500">Edit</a>
+                                            <a href="#" uk-toggle="target: #change-intro" className="text-sm text-blue-500">Edit</a>
                                         </div>
 
                                         <ul className="text-gray-700 space-y-4 mt-4 text-sm dark:text-white/80">
@@ -832,6 +867,97 @@ export default function Profile(){
                 </div>
             </div>
 
+            {/* change intro */}
+            <div className="hidden lg:p-20 uk- open" id="change-intro" uk-modal="container: false">
+                <div
+                    className="uk-modal-dialog tt relative overflow-hidden mx-auto bg-white shadow-xl rounded-lg md:w-[520px] w-full dark:bg-dark15">
+                    <div className="text-center py-4 border-b mb-0 dark:border-slate-700">
+                        <h2 className="text-sm font-medium text-black"> Change intro </h2>
+                        {/* close button */}
+                        <button type="button" className="button-icon absolute top-0 right-0 m-2.5 uk-modal-close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" className="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
+                        <input id="living_place_input" placeholder="Live in" type={"text"}
+                               className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
+                    </div>
+                    <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
+                        <input id="studying_place_input" placeholder="Studied at" type={"text"}
+                               className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
+                    </div>
+                    <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
+                        <input id="working_place_input" placeholder="Work at" type={"text"}
+                               className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
+                    </div>
+
+                    <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
+                        <select id="marital-status-input"
+                                className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800">
+                            <option disabled selected value style={{display: "none"}}>Marital status</option>
+                            <option value="Relationship">In relationship</option>
+                            <option value="The Search">In The Search</option>
+                            <option value="Alone">Alone</option>
+                            <option value="Marriage">In Marriage</option>
+                        </select>
+                    </div>
+                    <div className="p-5 flex justify-between items-center">
+                    <div>
+                            <div
+                                className="p-2 bg-white rounded-lg shadow-lg text-black font-medium border border-slate-100 w-60 dark:bg-slate-700"
+                                uk-drop="offset:10;pos: bottom-left; reveal-left;animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left ; mode:click">
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button type="button"
+                                    onClick={onChangeIntro}
+                                    className="button bg-blue-500 text-white py-2 px-12 text-[14px] uk-modal-close"> Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* change profile status */}
+            <div className="hidden lg:p-20 uk- open" id="change-profile-status" uk-modal="container: false">
+                <div
+                    className="uk-modal-dialog tt relative overflow-hidden mx-auto bg-white shadow-xl rounded-lg md:w-[520px] w-full dark:bg-dark15">
+                    <div className="text-center py-4 border-b mb-0 dark:border-slate-700">
+                        <h2 className="text-sm font-medium text-black"> Change status </h2>
+                        {/* close button */}
+                        <button type="button" className="button-icon absolute top-0 right-0 m-2.5 uk-modal-close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                 stroke="currentColor" className="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div className="space-y-5 mt-3 p-2">
+                        <textarea
+                            className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"
+                            name="" id="profile_status_textarea" rows="6"
+                            placeholder="Your status">{userData.status}</textarea>
+                    </div>
+                    <div className="p-5 flex justify-between items-center">
+                        <div>
+                            <div
+                                className="p-2 bg-white rounded-lg shadow-lg text-black font-medium border border-slate-100 w-60 dark:bg-slate-700"
+                                uk-drop="offset:10;pos: bottom-left; reveal-left;animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left ; mode:click">
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button type="button"
+                                    onClick={onChangeStatus}
+                                    className="button bg-blue-500 text-white py-2 px-12 text-[14px] uk-modal-close"> Change
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* create status */}
             <div className="hidden lg:p-20 uk- open" id="create-status" uk-modal="">
 
@@ -942,5 +1068,5 @@ export default function Profile(){
                 </div>
             </div>
         </>
-)
+    )
 }

@@ -18,11 +18,11 @@ internal class FileConfiguration : EntityBaseConfiguration<File>
         builder.Property(p => p.Name)
             .HasComment("Наименование файла");
         
-        builder.Property(p => p.Address)
-            .HasComment("Адрес файла");
-        
         builder.Property(p => p.Weight)
             .HasComment("Вес");
+        
+        builder.Property(p => p.ContentType)
+            .HasComment("Тип контента");
 
         builder.HasMany(x => x.Users)
             .WithOne(x => x.Avatar)

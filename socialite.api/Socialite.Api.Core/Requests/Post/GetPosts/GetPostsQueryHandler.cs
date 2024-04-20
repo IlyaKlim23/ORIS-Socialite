@@ -40,7 +40,6 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                         {
                             FileId = x.Owner.Avatar!.Id,
                             Name = x.Owner.Avatar.Name,
-                            Address = x.Owner.Avatar.Address
                         }
                     : null,
                     UserName = x.Owner.UserName!
@@ -56,7 +55,6 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                         {
                             FileId = y.Avatar!.Id,
                             Name = y.Avatar.Name,
-                            Address = y.Avatar.Address
                         }
                     : null
                 }).ToList(),
@@ -65,7 +63,6 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                 {
                     FileId = y.Id,
                     Name = y.Name,
-                    Address = y.Address
                 }).ToList(),
                 Comments = x.Comments!.Select(y => new GetPostsResponseItemComment
                 {
@@ -80,7 +77,6 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                         {
                             FileId = y.Owner.Avatar!.Id,
                             Name = y.Owner.Avatar.Name,
-                            Address = y.Owner.Avatar.Address
                         }
                     }
                 }).ToList(),

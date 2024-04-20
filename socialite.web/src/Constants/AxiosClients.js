@@ -9,3 +9,8 @@ export const userClient = axios.create({
 export const userProfileClient = axios.create({
   baseURL: `${backendOrigin}/api/UserProfiles/`,
 });
+
+
+export const filesClient = axios.create({
+  baseURL: `${backendOrigin}/api/Files/`,
+})

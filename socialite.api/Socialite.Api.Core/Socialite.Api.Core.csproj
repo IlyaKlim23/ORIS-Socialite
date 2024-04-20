@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Socialite.Api.Contracts\Socialite.Api.Contracts.csproj" />
+      <ProjectReference Include="..\Socialite.Api.S3\Socialite.Api.S3.csproj" />
     </ItemGroup>
 
 </Project>

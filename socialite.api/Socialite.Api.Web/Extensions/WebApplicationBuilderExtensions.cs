@@ -12,6 +12,7 @@ using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Interfaces;
 using Socialite.Api.Core.Services;
 using Socialite.Api.Db;
+using Socialite.Api.S3;
 using Socialite.Api.S3.Interfaces;
 using Socialite.Api.S3.Services;
 using Socialite.Api.Web.Configurators;
@@ -57,17 +58,10 @@ public static class WebApplicationBuilderExtensions
         builder.Services.AddSingleton<IS3Service, S3Service>();
         builder.Services.AddScoped<IRoleService, RoleService>();
         builder.Services.AddScoped<IEmailSenderService, EmailSenderService>();
-        builder.Services.AddMinio(
-            c =>
-            {
-                c.WithEndpoint(builder.Configuration["S3:Url"]);
-                c.WithCredentials(
-                    builder.Configuration["S3:AccessKey"],
-                    builder.Configuration["S3:SecretKey"]);
-                c.WithSSL(false);
-            }
-        
-            );
+        builder.Services.AddS3(
+            builder.Configuration["S3:Url"],
+            builder.Configuration["S3:AccessKey"],
+            builder.Configuration["S3:SecretKey"]);
         builder.Services
             .AddIdentity<User, Role>(opt =>
             {

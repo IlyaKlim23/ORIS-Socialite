@@ -54,4 +54,9 @@ public class GetCurrentUserInfoResponse
     /// Кол-во подписчиков
     /// </summary>
     public int SubscribersCount { get; set; }
+
+    /// <summary>
+    /// Идентификатор аватара
+    /// </summary>
+    public Guid? AvatarId { get; set; }
 }

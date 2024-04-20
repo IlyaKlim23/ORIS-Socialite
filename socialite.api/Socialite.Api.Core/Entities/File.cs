@@ -8,23 +8,22 @@ namespace Socialite.Api.Core.Entities;
 public class File : EntityBase
 {
     private string _name;
-    private string _address;
-    private string _weight;
+    private long _weight;
 
     /// <summary>
     /// Конструктор
     /// </summary>
     /// <param name="name">Название файла</param>
-    /// <param name="address">Адрес файла</param>
-    /// <param name="weight">Вес</param>
+    /// <param name="weight">Вес файла в байтах</param>
+    /// <param name="contentType">Тип контента</param>
     public File(
         string name,
-        string address,
-        string weight)
+        long weight,
+        string contentType)
     {
         Name = name;
-        Address = address;
         Weight = weight;
+        ContentType = contentType;
         NameWithoutExtension = name.Split('.').FirstOrDefault();
         Extension = name.Split('.').LastOrDefault();
         Users = new List<User>();
@@ -42,24 +41,18 @@ public class File : EntityBase
     }
 
     /// <summary>
-    /// Адрес файла
-    /// </summary>
-    public string Address 
-    { 
-        get => _address;
-        set => _address = value
-            ?? throw new RequiredFieldIsEmpty("Адрес файла");
-    }
-
-    /// <summary>
     /// Вес
     /// </summary>
-    public string Weight 
+    public long Weight 
     {
         get => _weight;
-        set => _weight = value
-            ?? throw new RequiredFieldIsEmpty("Вес файла");
+        set => _weight = value;
     }
+    
+    /// <summary>
+    /// Тип контента
+    /// </summary>
+    public string ContentType { get; set; }
 
     /// <summary>
     /// Наименование файла без расширения

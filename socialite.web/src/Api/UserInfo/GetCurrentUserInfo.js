@@ -12,12 +12,10 @@ export default async function GetCurrentUserInfo() {
             },
         })
         .then((response) => {
-            console.log(response);
             result = response
         })
         .catch((error) => {
-            console.log(error);
-            if (error.response.status === 401) {
+            if (error?.response?.status === 401) {
                 localStorage.removeItem(authToken);
             }
         });

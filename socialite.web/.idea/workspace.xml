@@ -5,24 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="[WEB] auth system">
-      <change afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.S3/Entry.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/File.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/File.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Socialite.Api.Core.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Socialite.Api.Core.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Configuration/FileConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Configuration/FileConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Migrations/EfContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Db/Migrations/EfContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.S3/Interfaces/IS3Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.S3/Interfaces/IS3Service.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.S3/Services/S3Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.S3/Services/S3Service.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserProfilesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserProfilesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Extensions/WebApplicationBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Extensions/WebApplicationBuilderExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/UserInfo/GetCurrentUserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/UserInfo/GetCurrentUserInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/tailwind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/StaticFiles/UploadFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/StaticFiles/UploadFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Styles/componentStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Styles/componentStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Constants/AxiosClients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/AxiosClients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/style/profile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/style/profile.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,6 +132,7 @@
       <workItem from="1713546587156" duration="9341000" />
       <workItem from="1713595746573" duration="7704000" />
       <workItem from="1713617136295" duration="10238000" />
+      <workItem from="1713683354217" duration="11473000" />
     </task>
     <task id="LOCAL-00001" summary="[WEB] auth">
       <option name="closed" value="true" />

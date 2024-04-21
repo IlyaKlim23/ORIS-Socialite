@@ -1,11 +1,12 @@
 import Sidebar from "../../Components/Sidebar";
 import Header from "../../Components/Header";
+import {feed} from "../../Constants/PagePaths";
 
 
 export default function Feed(){
     return(
         <>
-            <Sidebar />
+            <Sidebar currentPage={feed}/>
             <Header />
             <div id="wrapper">
                 <div id="sidebar"></div>

@@ -1,11 +1,13 @@
 import {feed} from "../Constants/PagePaths";
 import feedLogo from "../Sources/Images/Icons/home.png"
 import messagesLogo from "../Sources/Images/Icons/messages.png"
+import "./Styles/componentStyles.css"
 
-function Sidebar() {
+function Sidebar(currentPage) {
     return(
         <>
             <div id="site__sidebar"
+                 onClick={() => console.log(currentPage)}
                  className="fixed top-0 left-0 z-[99] pt-[--m-top] bg-white/10 overflow-hidden transition-transform xl:duration-500 dark:bg-dark15 max-xl:w-full max-xl:-translate-x-full">
                 <div
                     className="p-2 max-xl:bg-white shadow-sm 2xl:w-72 sm:w-64 w-[80%] h-[calc(100vh-64px)] relative z-30 max-lg:border-r dark:max-xl:!bg-slate-700 dark:border-slate-700">
@@ -13,9 +15,8 @@ function Sidebar() {
                     <div className="pr-4" data-simplebar>
 
                         <nav id="side">
-
                             <ul>
-                                <li className="active">
+                                <li className={currentPage.currentPage === feed ? "active" : ""}>
                                     <a href={feed}>
                                         <img src={feedLogo} alt="feeds" className="w-6"/>
                                         <span> Feed </span>
@@ -24,7 +25,7 @@ function Sidebar() {
                                 <li>
                                     <a href="messages.html">
                                         <img src={messagesLogo} alt="messages" className="w-6"/>
-                                        <span> messages </span>
+                                        <span> Messages </span>
                                     </a>
                                 </li>
                             </ul>
@@ -35,7 +36,7 @@ function Sidebar() {
                                     <div className="text-black dark:text-white">Pages</div>
                                 </div>
 
-                                <ul className="mt-2 -space-y-2"
+                                <ul className=""
                                     uk-nav="multiple: true">
 
                                     <li>

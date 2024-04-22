@@ -18,5 +18,15 @@ public class GetPostsResponseItemUser
     /// <summary>
     /// Никнейм пользователя
     /// </summary>
-    public string? UserName { get; set; } = default!;
+    public string? UserName { get; set; }
+
+    /// <summary>
+    /// Имя пользователя
+    /// </summary>
+    public string FirstName { get; set; } = default!;
+    
+    /// <summary>
+    /// Фамилия пользователя
+    /// </summary>
+    public string LastName { get; set; } = default!;
 }

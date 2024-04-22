@@ -1,4 +1,6 @@
-﻿namespace Socialite.Api.Contracts.Requests.Subscribers.GetSubscribedTo;
+﻿using Socialite.Api.Contracts.Models;
+
+namespace Socialite.Api.Contracts.Requests.Subscribers.GetSubscribedTo;
 
 /// <summary>
 /// Ответ на запрос на получение пользователей, на которых подписан текущий пользователь

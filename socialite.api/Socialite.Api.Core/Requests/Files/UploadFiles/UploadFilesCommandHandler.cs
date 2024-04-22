@@ -29,6 +29,8 @@ public class UploadFilesCommandHandler : IRequestHandler<UploadFilesCommand, Upl
     /// <inheritdoc />
     public async Task<UploadFilesResponse> Handle(UploadFilesCommand request, CancellationToken cancellationToken)
     {
+        await _s3Service.CheckS3AvailabilityAsync(cancellationToken);
+
         var filesToAdd = FileManager.GetFilesStreamEnumerable(request.Files).ToList();
 
         var result = new Dictionary<string, Guid>();

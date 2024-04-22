@@ -26,11 +26,6 @@ public class GetPostsResponseItem
     public DateTime CreateDate { get; set; }
 
     /// <summary>
-    /// Лайкнувшие пользователи
-    /// </summary>
-    public List<GetPostsResponseItemUser> LikedUsers { get; set; } = default!;
-
-    /// <summary>
     /// Кол-во лайков
     /// </summary>
     public int LikesCount { get; set; }

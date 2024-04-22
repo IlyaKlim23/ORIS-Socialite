@@ -14,9 +14,4 @@ public class GetPostsResponseItemFile
     /// Имя
     /// </summary>
     public string Name { get; set; } = default!;
-
-    /// <summary>
-    /// Адрес
-    /// </summary>
-    public string Address { get; set; } = default!;
 }

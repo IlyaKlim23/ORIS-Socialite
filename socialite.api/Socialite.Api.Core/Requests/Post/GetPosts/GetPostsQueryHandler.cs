@@ -36,28 +36,18 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                 {
                     UserId = x.Owner.Id,
                     Avatar = x.Owner.Avatar != null
-                    ? new GetPostsResponseItemFile
-                        {
-                            FileId = x.Owner.Avatar!.Id,
-                            Name = x.Owner.Avatar.Name,
-                        }
-                    : null,
-                    UserName = x.Owner.UserName!
+                        ? new GetPostsResponseItemFile
+                            {
+                                FileId = x.Owner.Avatar!.Id,
+                                Name = x.Owner.Avatar.Name,
+                            }
+                        : null,
+                    UserName = x.Owner.UserName!,
+                    FirstName = x.Owner.FirstName,
+                    LastName = x.Owner.LastName,
                 },
                 Description = x.Description,
                 CreateDate = x.CreateDate,
-                LikedUsers = x.LikedUsers!.Select(y => new GetPostsResponseItemUser
-                {
-                    UserId = y.Id,
-                    UserName = y.UserName!,
-                    Avatar = y.Avatar != null 
-                    ? new GetPostsResponseItemFile
-                        {
-                            FileId = y.Avatar!.Id,
-                            Name = y.Avatar.Name,
-                        }
-                    : null
-                }).ToList(),
                 LikesCount = x.LikedUsers!.Count,
                 Files = x.Files!.Select(y => new GetPostsResponseItemFile
                 {
@@ -73,6 +63,8 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                     {
                         UserId = y.Owner.Id,
                         UserName = y.Owner.UserName!,
+                        FirstName = y.Owner.FirstName,
+                        LastName = y.Owner.LastName,
                         Avatar = new GetPostsResponseItemFile
                         {
                             FileId = y.Owner.Avatar!.Id,
@@ -80,8 +72,9 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                         }
                     }
                 }).ToList(),
-                CommentsCount = x.Comments.Count
+                CommentsCount = x.Comments!.Count
             })
+            .OrderByDescending(x => x.CreateDate)
             .ToListAsync(cancellationToken);
 
         var count = await query.CountAsync(cancellationToken);

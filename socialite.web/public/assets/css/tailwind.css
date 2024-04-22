@@ -2678,6 +2678,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 1rem;
 }
 
+.ml-422 {
+  margin-left: 1.2rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -6866,6 +6870,10 @@ h1, h2, h3, h4, h5, h6 {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 
+  .dark\:text-white\/60 {
+    color: rgb(255 255 255 / 0.6);
+  }
+
   .dark\:text-white\/70 {
     color: rgb(255 255 255 / 0.7);
   }
@@ -7369,6 +7377,10 @@ h1, h2, h3, h4, h5, h6 {
 
   .sm\:w-96 {
     width: 24rem;
+  }
+
+  .sm\:w-100 {
+    width: 25rem;
   }
 
   .sm\:w-full {

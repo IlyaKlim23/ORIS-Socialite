@@ -26,3 +26,23 @@
     text-align: center;
     font-size: 16px;
 }
+
+.hr-dotted {
+    padding: 0;
+    height: 0;
+    border-top: 1px solid;
+    border-color: rgba(60, 72, 89, 0.4);;
+}
+
+.slider-images{
+
+}
+
+.slider-images:hover .nav-button{
+    opacity: 1;
+}
+
+.nav-button{
+    transition: opacity 0.5s;
+    opacity: 0;
+}

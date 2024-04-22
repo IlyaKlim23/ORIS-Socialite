@@ -10,24 +10,24 @@ public enum MaritalStatuses
     /// <summary>
     /// В отношениях
     /// </summary>
-    [Description("Relationship")]
+    [Description("В отношениях")]
     InRelationship = 0,
     
     /// <summary>
     /// В поиске
     /// </summary>
-    [Description("The Search")]
+    [Description("В поиске")]
     InTheSearch = 1,
     
     /// <summary>
     /// Одинок
     /// </summary>
-    [Description("Alone")]
+    [Description("Одинок")]
     Alone = 2,
     
     /// <summary>
     /// В браке
     /// </summary>
-    [Description("Marriage")]
+    [Description("В браке")]
     InMarriage = 3
 }

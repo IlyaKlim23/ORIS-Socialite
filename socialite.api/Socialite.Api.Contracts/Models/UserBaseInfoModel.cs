@@ -1,4 +1,4 @@
-﻿namespace Socialite.Api.Contracts.Requests.Subscribers;
+﻿namespace Socialite.Api.Contracts.Models;
 
 /// <summary>
 /// Подписчик
@@ -6,15 +6,15 @@
 public class UserBaseInfoModel
 {
     /// <summary>
-    /// Идентификатор
+    /// Идентификатор пользователя
     /// </summary>
-    public Guid Id { get; set; }
-
-    /// <summary>
-    /// Никнейм пользователя
-    /// </summary>
-    public string? UserName { get; set; }
+    public Guid UserId { get; set; }
     
+    /// <summary>
+    /// Идентификатор аватарки
+    /// </summary>
+    public Guid? AvatarId { get; set; }
+
     /// <summary>
     /// Имя
     /// </summary>
@@ -24,4 +24,9 @@ public class UserBaseInfoModel
     /// Фамилия
     /// </summary>
     public string LastName { get; set; } = default!;
+
+    /// <summary>
+    /// Никнейм
+    /// </summary>
+    public string? UserName { get; set; }
 }

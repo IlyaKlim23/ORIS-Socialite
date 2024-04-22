@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Socialite.Api.Contracts.Requests.Files.UploadFiles;
 using Socialite.Api.Core.Requests.Files.DownloadFile;
+using Socialite.Api.Core.Requests.Files.RemoveUnusedFiles;
 using Socialite.Api.Core.Requests.Files.UploadFiles;
 
 namespace Socialite.Api.Web.Controllers;
@@ -41,4 +42,15 @@ public class FilesController : BaseController
         var file = await mediator.Send(new DownloadFileQuery(fileId), cancellationToken);
         return new FileStreamResult(file.Content, file.ContentType);
     }
+
+    /// <summary>
+    /// Удалить неиспользуемые файлы
+    /// </summary>
+    /// <param name="mediator"></param>
+    /// <param name="cancellationToken"></param>
+    [HttpDelete("removeUnusedFiles")]
+    public async Task RemoveUnusedFiles(
+        [FromServices] IMediator mediator,
+        CancellationToken cancellationToken)
+        => await mediator.Send(new RemoveUnusedFilesCommand(), cancellationToken);
 }

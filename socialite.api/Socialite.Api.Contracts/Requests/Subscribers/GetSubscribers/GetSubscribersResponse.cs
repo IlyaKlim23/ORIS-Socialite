@@ -1,4 +1,6 @@
-﻿namespace Socialite.Api.Contracts.Requests.Subscribers.GetSubscribers;
+﻿using Socialite.Api.Contracts.Models;
+
+namespace Socialite.Api.Contracts.Requests.Subscribers.GetSubscribers;
 
 /// <summary>
 /// Ответ на получение подписчиков

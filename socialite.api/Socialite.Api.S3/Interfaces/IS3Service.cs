@@ -5,6 +5,12 @@
 /// </summary>
 public interface IS3Service
 {
+	/// <summary>
+	/// Проверить S3 сервис на работоспособность
+	/// </summary>
+	/// <param name="cancellationToken"></param>
+	public Task CheckS3AvailabilityAsync(CancellationToken cancellationToken);
+	
     /// <summary>
 	/// Проверить пакет на существование 
 	/// </summary>
@@ -18,34 +24,34 @@ public interface IS3Service
 	/// </summary>
 	/// <param name="fileStream">Файл в виде <see cref="Stream"/></param>
 	/// <param name="fileIdentifier">Уникальный идентификатор файла</param>
-	/// <param name="fileType">Тип файла</param>
+	/// <param name="fileExtension">Расширение файла</param>
 	/// <param name="cancellationToken">Токен отмены</param>
 	public Task AddFileInBucketAsync(
 		Stream fileStream,
 		Guid fileIdentifier,
-		string fileType,
+		string? fileExtension,
 		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Удалить файл из пакета
 	/// </summary>
 	/// <param name="fileIdentifier">Уникальный идентификатор файла</param>
-	/// <param name="fileType">Тип файла</param>
+	/// <param name="fileExtension">Расширение файла</param>
 	/// <param name="cancellationToken">Токен отмены</param>
 	public Task RemoveFileFromBucketAsync(
 		Guid fileIdentifier,
-		string fileType,
+		string? fileExtension,
 		CancellationToken cancellationToken);
 
 	/// <summary>
 	/// Получить файл из пакета
 	/// </summary>
 	/// <param name="fileIdentifier">Уникальный идентификатор файла</param>
-	/// <param name="fileType">Тип файла</param>
+	/// <param name="fileExtension">Расширение файла</param>
 	/// <param name="cancellationToken">Токен отмены</param>
 	/// <returns>Файл в виде <see cref="MemoryStream"/></returns>
 	public Task<MemoryStream?> GetFileFromBucketAsync(
 		Guid fileIdentifier,
-		string fileType,
+		string? fileExtension,
 		CancellationToken cancellationToken);
 }

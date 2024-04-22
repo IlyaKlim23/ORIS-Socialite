@@ -10,7 +10,8 @@ export default async function UploadFile(files){
 
     let result;
     await filesClient
-        .post("", data, { headers :{
+        .post("", data, {
+            headers :{
             'content-type': 'multipart/form-data'
             }})
         .then((response) =>{

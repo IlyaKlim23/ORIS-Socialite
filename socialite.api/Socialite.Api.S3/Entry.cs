@@ -19,6 +19,7 @@ public static class Entry
         => services.AddMinio(
                 c =>
                 {
+                    
                     c.WithEndpoint(url);
                     c.WithCredentials(
                         accessKey,

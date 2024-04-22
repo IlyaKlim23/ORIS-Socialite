@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Socialite.Api.Contracts.Requests.User.GetUsers;
 using Socialite.Api.Contracts.Requests.User.RegisterUser;
 using Socialite.Api.Contracts.Requests.User.ResetPassword;
 using Socialite.Api.Contracts.Requests.User.SendResetPasswordCode;
 using Socialite.Api.Contracts.Requests.User.SignIn;
+using Socialite.Api.Core.Requests.User.GetUsers;
 using Socialite.Api.Core.Requests.User.RegisterUser;
 using Socialite.Api.Core.Requests.User.ResetPassword;
 using Socialite.Api.Core.Requests.User.SendResetPasswordCode;
@@ -84,4 +86,18 @@ public class UserController : BaseController
             Password = request.Password,
             Code = request.Code,
         }, cancellationToken);
+
+    /// <summary>
+    /// Получить всех пользователей
+    /// </summary>
+    /// <param name="mediator"></param>
+    /// <param name="request"></param>
+    /// <param name="cancellationToken">Токен отмены</param>
+    /// <returns></returns>
+    [HttpPost("getUsers")]
+    public async Task<GetUsersResponse> GetUsersAsync(
+        [FromServices] IMediator mediator,
+        [FromBody] GetUsersRequest request,
+        CancellationToken cancellationToken)
+        => await mediator.Send(new GetUsersQuery(request), cancellationToken);
 }

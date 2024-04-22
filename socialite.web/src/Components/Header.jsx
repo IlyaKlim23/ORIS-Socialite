@@ -2,6 +2,7 @@ import {profile} from "../Constants/PagePaths";
 import {SmallAvatar} from "../Constants/Images/Avatars";
 import {useEffect, useState} from "react";
 import CurrentUserInfoAsync from "../CommonServices/CurrentUserInfo";
+import SearchString from "./SearchString/SearchString";
 
 function Header(){
     const [userInfo, setUserInfo] = useState({})
@@ -21,27 +22,13 @@ function Header(){
             <header
                 className="z-[100] h-[--m-top] fixed top-0 left-0 w-full flex items-center bg-white/80 sky-50 backdrop-blur-xl border-b border-slate-200 dark:bg-dark2 dark:border-slate-800">
 
-                <div className="flex items-center w-full xl:px-6 px-2 max-lg:gap-10">
+                <div className="flex items-center w-full   max-lg:gap-10">
 
-                    <div className="2xl:w-[--w-side] lg:w-[--w-side-sm]">
-
-                        {/* left */}
-                        <div className="flex items-center gap-1">
-
-                            {/* icon menu */}
-                            <button uk-toggle="target: #site__sidebar ; cls :!-translate-x-0"
-                                    className="flex items-center justify-center w-8 h-8 text-xl rounded-full hover:bg-gray-100 xl:hidden dark:hover:bg-slate-600 group">
-                                <ion-icon name="menu-outline"
-                                          className="text-2xl group-aria-expanded:hidden"></ion-icon>
-                                <ion-icon name="close-outline"
-                                          className="hidden text-2xl group-aria-expanded:block"></ion-icon>
-                            </button>
-                        </div>
-
-                    </div>
                     <div className="flex-1 relative">
 
-                        <div className="max-w-[1220px] mx-auto flex items-center">
+                        <div className="max-w-[1220px] ml-422 flex items-center">
+
+                                <SearchString/>
 
                             {/* header icons */}
                             <div

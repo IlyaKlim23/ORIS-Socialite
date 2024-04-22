@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Socialite.Api.Contracts.Models;
 using Socialite.Api.Contracts.Requests.Subscribers;
 using Socialite.Api.Contracts.Requests.Subscribers.GetSubscribers;
 using Socialite.Api.Core.Exceptions;
@@ -33,7 +34,8 @@ public class GetSubscribersQueryHandler : IRequestHandler<GetSubscribersQuery, G
         var result = user.Subscribers
             .Select(x => new UserBaseInfoModel
             {
-                Id = x.Id,
+                UserId = x.Id,
+                AvatarId = x.AvatarId,
                 UserName = x.UserName,
                 FirstName = x.FirstName,
                 LastName = x.LastName,

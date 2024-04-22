@@ -4,6 +4,7 @@ import {authToken} from "../../Constants/LocalStorageItemKeys";
 
 export default async function GetUsersBaseInfo(userData){
     let token = localStorage.getItem(authToken);
+    console.log(token)
     const data = {
         countItems: 5,
         userName: userData.userName
@@ -11,7 +12,7 @@ export default async function GetUsersBaseInfo(userData){
 
     let result
     await userClient
-        .post('getUsers', data, {headers:{
+        .post('getUsers', data, {headers : {
                 Authorization: `Bearer ${token}`
             }})
         .then((response) => {

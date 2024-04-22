@@ -1,7 +1,7 @@
 ﻿namespace Socialite.Api.Contracts.Models;
 
 /// <summary>
-/// Подписчик
+/// Базовая модель пользователя
 /// </summary>
 public class UserBaseInfoModel
 {

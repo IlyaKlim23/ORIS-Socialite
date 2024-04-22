@@ -1,4 +1,4 @@
-import {profile} from "../Constants/PagePaths";
+import {profile, signIn} from "../Constants/PagePaths";
 import {SmallAvatar} from "../Constants/Images/Avatars";
 import {useEffect, useState} from "react";
 import CurrentUserInfoAsync from "../CommonServices/CurrentUserInfo";
@@ -10,6 +10,11 @@ function Header(){
     async function loadProfile(){
         const result = await CurrentUserInfoAsync()
         setUserInfo(result)
+    }
+
+    function onLogOut(){
+        localStorage.clear()
+        window.location.href = signIn
     }
 
     useEffect(() => {
@@ -326,7 +331,8 @@ function Header(){
                                             </div>
                                         </button>
                                         <hr className="-mx-2 my-2 dark:border-gray-600/60"/>
-                                        <a href="../../../public/form-login.html">
+                                        <a href="#"
+                                            onClick={onLogOut}>
                                             <div
                                                 className="flex items-center gap-2.5 hover:bg-secondery p-2 px-2.5 rounded-md dark:hover:bg-white/10">
                                                 <svg className="w-6" xmlns="http://www.w3.org/2000/svg" fill="none"

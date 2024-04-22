@@ -42,17 +42,6 @@ public class PutCurrentUserInfoCommandHandler : IRequestHandler<PutCurrentUserIn
                 .FirstOrDefaultAsync(x => x.Id == innerRequest.AvatarId, cancellationToken)
                 ?? throw new EntityNotFoundException<File>(innerRequest.AvatarId.Value);
 
-            if (user.AvatarId.HasValue)
-            {
-                await _s3Service.CheckS3AvailabilityAsync(cancellationToken);
-                var avatar = await _dbContext.Files
-                    .FirstOrDefaultAsync(x => x.Id == user.AvatarId, cancellationToken)
-                    ?? throw new EntityNotFoundException<File>(user.AvatarId.Value);
-
-                await _s3Service.RemoveFileFromBucketAsync(avatar.Id, avatar.Extension, cancellationToken);
-                _dbContext.Files.Remove(avatar);
-            }
-
             user.Avatar = file;
         }
 

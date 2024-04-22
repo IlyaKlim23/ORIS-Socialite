@@ -17,13 +17,13 @@ export default function UserInfo(userInfo){
 
     useEffect(() => {
         loadAvatar()
-    }, []);
+    }, [userInfo]);
 
     return(
         <>
             <a href="#"
                className=" relative px-3 py-1.5 flex items-center gap-4 hover:bg-secondery rounded-lg dark:hover:bg-white/10">
-                <img alt="" src={avatar ? avatar : SmallAvatar} className="w-9 h-9 rounded-full"/>
+                <img alt="" src={userInfo.userInfo.avatarId ? avatar : SmallAvatar} className="w-9 h-9 rounded-full"/>
                 <div>
                     <div> {info.firstName} {info.lastName} </div>
                     <div

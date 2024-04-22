@@ -2,7 +2,6 @@ import {useState} from "react";
 import GetUsersBaseInfo from "../../Api/UserInfo/GetUsersBaseInfo";
 import UserInfo from "./UserInfo";
 
-
 export default function SearchString(){
     const [users, setUsers] = useState([])
 
@@ -31,10 +30,7 @@ export default function SearchString(){
 
                         <nav className="text-sm font-medium text-black dark:text-white">
                             {
-                                users.map(((x, index) => (
-                                    <div key={index}>
-                                    <UserInfo userInfo={x}></UserInfo>
-                                    </div>)))
+                                users.map(x => <UserInfo userInfo={x}/>)
                             }
                         </nav>
                     </div>

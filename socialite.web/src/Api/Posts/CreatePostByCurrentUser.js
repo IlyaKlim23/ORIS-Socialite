@@ -11,9 +11,9 @@ export default async function CreatePostByCurrentUser(postInfo){
 
     let result
     await postsClient
-        .post("", data, {headers : {
+        .post("", data, { headers : {
                 Authorization: `Bearer ${token}`
-            }})
+            }} )
         .then((response) => {
             result = response;
         })

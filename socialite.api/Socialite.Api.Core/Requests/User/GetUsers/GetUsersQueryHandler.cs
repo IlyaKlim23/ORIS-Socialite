@@ -27,9 +27,10 @@ public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, GetUsersRespo
     {
         var innerRequest = request.Request;
         var users = await _userService.Users()
+            .Where(x => x.Id != request.CurrentUserId)
             .Where(x => !string.IsNullOrEmpty(innerRequest.UserName) &&
                         x.UserName!.ToLower().Contains(innerRequest.UserName.ToLower()))
-            .Select(x => new UserBaseInfoModel()
+            .Select(x => new UserBaseInfoModel
             {
                 UserId = x.Id,
                 AvatarId = x.AvatarId,

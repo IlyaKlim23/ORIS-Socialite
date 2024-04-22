@@ -5,11 +5,13 @@ using Socialite.Api.Contracts.Requests.User.RegisterUser;
 using Socialite.Api.Contracts.Requests.User.ResetPassword;
 using Socialite.Api.Contracts.Requests.User.SendResetPasswordCode;
 using Socialite.Api.Contracts.Requests.User.SignIn;
+using Socialite.Api.Core.Constants;
 using Socialite.Api.Core.Requests.User.GetUsers;
 using Socialite.Api.Core.Requests.User.RegisterUser;
 using Socialite.Api.Core.Requests.User.ResetPassword;
 using Socialite.Api.Core.Requests.User.SendResetPasswordCode;
 using Socialite.Api.Core.Requests.User.SignIn;
+using Socialite.Api.Web.Attributes;
 
 namespace Socialite.Api.Web.Controllers;
 
@@ -94,10 +96,11 @@ public class UserController : BaseController
     /// <param name="request"></param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns></returns>
+    [Policy(PolicyConstants.IsDefaultUser)]
     [HttpPost("getUsers")]
     public async Task<GetUsersResponse> GetUsersAsync(
         [FromServices] IMediator mediator,
         [FromBody] GetUsersRequest request,
         CancellationToken cancellationToken)
-        => await mediator.Send(new GetUsersQuery(request), cancellationToken);
+        => await mediator.Send(new GetUsersQuery(request, CurrentUserId), cancellationToken);
 }

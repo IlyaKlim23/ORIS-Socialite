@@ -12,11 +12,18 @@ public class GetUsersQuery : IRequest<GetUsersResponse>
     /// Конструктор
     /// </summary>
     /// <param name="request"></param>
-    public GetUsersQuery(GetUsersRequest request)
+    /// <param name="currentUserId"></param>
+    public GetUsersQuery(GetUsersRequest request, Guid currentUserId)
     {
         Request = request;
+        CurrentUserId = currentUserId;
     }
 
+    /// <summary>
+    /// Текущий пользователь
+    /// </summary>
+    public Guid CurrentUserId { get; set; }
+    
     /// <summary>
     /// Запрос
     /// </summary>

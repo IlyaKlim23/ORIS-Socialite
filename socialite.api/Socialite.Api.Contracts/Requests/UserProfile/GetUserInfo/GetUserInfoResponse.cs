@@ -1,10 +1,15 @@
-﻿namespace Socialite.Api.Contracts.Requests.UserProfile.GetCurrentUserInfo;
+﻿namespace Socialite.Api.Contracts.Requests.UserProfile.GetUserInfo;
 
 /// <summary>
 /// Ответ на запрос на получение информации о текущем пользователе
 /// </summary>
-public class GetCurrentUserInfoResponse
+public class GetUserInfoResponse
 {
+    /// <summary>
+    /// Идентификатор пользователя
+    /// </summary>
+    public Guid UserId { get; set; }
+    
     /// <summary>
     /// Никнейм
     /// </summary>
@@ -56,7 +61,27 @@ public class GetCurrentUserInfoResponse
     public int SubscribersCount { get; set; }
 
     /// <summary>
+    /// Кол-во подписок
+    /// </summary>
+    public int SubscriberToCount { get; set; }
+
+    /// <summary>
+    /// Кол-во друзей
+    /// </summary>
+    public int FriendCount { get; set; }
+
+    /// <summary>
     /// Идентификатор аватара
     /// </summary>
     public Guid? AvatarId { get; set; }
+
+    /// <summary>
+    /// Является подписчиком
+    /// </summary>
+    public bool IsSubscriber { get; set; }
+
+    /// <summary>
+    /// Текущий пользователь подписан
+    /// </summary>
+    public bool IsSubscribeTo { get; set; }
 }

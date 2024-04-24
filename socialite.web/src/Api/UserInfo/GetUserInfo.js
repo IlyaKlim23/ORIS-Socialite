@@ -1,12 +1,15 @@
 import { authToken } from "../../Constants/LocalStorageItemKeys";
 import { userProfileClient } from "../../Constants/AxiosClients";
 
-export default async function GetCurrentUserInfo() {
+export default async function GetUserInfo(userId) {
     let token = localStorage.getItem(authToken);
 
     let result;
     await userProfileClient
-        .get('currentUserInfo', {
+        .get('', {
+            params:{
+                userId: userId
+            },
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -15,17 +15,17 @@ public class Comment : EntityBase
     /// </summary>
     /// <param name="text">Текст комментария</param>
     /// <param name="createDate">Дата и время создания</param>
-    /// <param name="owner">Владелец</param>
+    /// <param name="ownerId">Владелец</param>
     /// <param name="post">Пост</param>
     public Comment(
         string text,
         DateTime createDate,
-        User owner,
+        Guid ownerId,
         Post post)
     {
         Text = text;
         CreateDate = createDate;
-        Owner = owner;
+        OwnerId = ownerId;
         Post = post;
     }
     

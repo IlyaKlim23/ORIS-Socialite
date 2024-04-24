@@ -4,7 +4,6 @@ import {authToken} from "../../Constants/LocalStorageItemKeys";
 
 export default async function GetUsersBaseInfo(userData){
     let token = localStorage.getItem(authToken);
-    console.log(token)
     const data = {
         countItems: 5,
         userName: userData.userName

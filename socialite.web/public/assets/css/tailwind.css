@@ -6870,6 +6870,11 @@ h1, h2, h3, h4, h5, h6 {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 
+  .dark\:text-white\/50 {
+    color: rgb(255 255 255 / 0.5);
+  }
+
+
   .dark\:text-white\/60 {
     color: rgb(255 255 255 / 0.6);
   }

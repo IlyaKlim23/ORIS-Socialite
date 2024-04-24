@@ -1,14 +1,14 @@
 import {profile, signIn} from "../Constants/PagePaths";
 import {SmallAvatar} from "../Constants/Images/Avatars";
 import {useEffect, useState} from "react";
-import CurrentUserInfoAsync from "../CommonServices/CurrentUserInfo";
+import UserInfoAsync from "../CommonServices/UserInfo";
 import SearchString from "./SearchString/SearchString";
 
 function Header(){
     const [userInfo, setUserInfo] = useState({})
 
     async function loadProfile(){
-        const result = await CurrentUserInfoAsync()
+        const result = await UserInfoAsync(null)
         setUserInfo(result)
     }
 
@@ -33,76 +33,10 @@ function Header(){
 
                         <div className="max-w-[1220px] ml-422 flex items-center">
 
-                                <SearchString/>
+                            <SearchString />
 
                             {/* header icons */}
-                            <div
-                                className="flex items-center sm:gap-4 gap-2 absolute right-5 top-1/2 -translate-y-1/2 text-black">
-                                {/* create */}
-                                <button type="button"
-                                        className="sm:p-2 p-1 rounded-full relative sm:bg-secondery dark:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                         stroke-width="1.5" stroke="currentColor" className="w-5 h-5 max-sm:hidden">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                              d="M12 4.5v15m7.5-7.5h-15"></path>
-                                    </svg>
-                                </button>
-                                <div
-                                    className="hidden bg-white p-4 rounded-lg overflow-hidden drop-shadow-xl dark:bg-slate-700 md:w-[324px] w-screen border2"
-                                    uk-drop="offset:6;pos: bottom-right; mode: click; animate-out: true; animation: uk-animation-scale-up uk-transform-origin-top-right ">
-
-                                    <h3 className="font-bold text-md"> Create </h3>
-
-                                    {/* slider */}
-                                    <div className="mt-4" tabIndex="-1" uk-slider="finite:true;sets: true">
-
-                                        <div className="uk-slider-container pb-1">
-
-                                            <ul className="uk-slider-items grid-small"
-                                                uk-scrollspy="target: > li; cls: uk-animation-scale-up , uk-animation-slide-right-small; delay: 20 ;repeat: true">
-                                                <li className="w-28" uk-scrollspy-class="uk-animation-fade">
-                                                    <div
-                                                        className="p-3 px-4 rounded-lg bg-teal-100/60 text-teal-600 dark:text-white dark:bg-dark4">
-                                                        <ion-icon name="book"
-                                                                  className="text-2xl drop-shadow-md"></ion-icon>
-                                                        <div className="mt-1.5 text-sm font-medium"> Story</div>
-                                                    </div>
-                                                </li>
-                                                <li className="w-28">
-                                                    <div
-                                                        className="p-3 px-4 rounded-lg bg-sky-100/60 text-sky-600 dark:text-white dark:bg-dark4">
-                                                        <ion-icon name="camera"
-                                                                  className="text-2xl drop-shadow-md"></ion-icon>
-                                                        <div className="mt-1.5 text-sm font-medium"> Post</div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        {/* slide nav icons */}
-                                        <div className="dark:hidden">
-                                            <a className="absolute -translate-y-1/2 top-1/2 -left-4 flex items-center w-8 h-full px-1.5 justify-start bg-gradient-to-r from-white via-white dark:from-slate-600 dark:via-slate-500 dark:from-transparent dark:via-transparent"
-                                               href="#" uk-slider-item="previous">
-                                                <ion-icon name="chevron-back"
-                                                          className="text-xl dark:text-white"></ion-icon>
-                                            </a>
-                                            <a className="absolute -translate-y-1/2 top-1/2 -right-4 flex items-center w-8 h-full px-1.5 justify-end bg-gradient-to-l from-white via-white dark:from-transparent dark:via-transparent"
-                                               href="#" uk-slider-item="next">
-                                                <ion-icon name="chevron-forward"
-                                                          className="text-xl dark:text-white"></ion-icon>
-                                            </a>
-                                        </div>
-
-
-                                        {/* slide nav */}
-                                        <div className="justify-center mt-2 -mb-2 hidden dark:flex">
-                                            <ul className="inline-flex flex-wrap justify-center gap-1 uk-dotnav uk-slider-nav"></ul>
-                                        </div>
-
-                                    </div>
-
-                                </div>
+                            <div className="flex items-center sm:gap-4 gap-2 absolute right-6 top-1/2 -translate-y-1/2 text-black">
 
                                 {/* notification */}
                                 <button type="button"

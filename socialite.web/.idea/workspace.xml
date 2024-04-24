@@ -4,20 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="[WEB] create post feature">
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Models/UserBaseInfoModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Models/UserBaseInfoModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/User/GetUsers/GetUsersQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/User/GetUsers/GetUsersQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/User/GetUsers/GetUsersQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/User/GetUsers/GetUsersQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/PutCurrentUserInfo/PutCurrentUserInfoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/PutCurrentUserInfo/PutCurrentUserInfoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserController.cs" afterDir="false" />
+    <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="[WEB/API] bugfix">
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/UserProfile/GetUserInfo/GetUserInfoResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/Comment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Entities/Comment.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetUserInfo/GetUserInfoQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetCurrentUserInfo/GetCurrentUserInfoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/UserProfile/GetUserInfo/GetUserInfoQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/SubscribersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/SubscribersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserProfilesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/UserProfilesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Posts/CreatePostByCurrentUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Posts/CreatePostByCurrentUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/tailwind.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-page.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/timeline-page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/Auth/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Auth/SignIn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/UserInfo/GetCurrentUserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/UserInfo/GetUserInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Api/UserInfo/GetUsersBaseInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/UserInfo/GetUsersBaseInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CommonServices/CurrentUserInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommonServices/UserInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CommonServices/DateParser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommonServices/DateParser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SearchString/SearchString.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SearchString/SearchString.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Posts/Comment.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Posts/Comment.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Posts/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Posts/Post.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Posts/Posts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Posts/Posts.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/SearchString/UserInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SearchString/UserInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants/AxiosClients.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/AxiosClients.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Constants/LocalStorageItemKeys.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/LocalStorageItemKeys.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Constants/PagePaths.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/PagePaths.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pages/UserProfile/UserProfile.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +43,8 @@
       <list>
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -58,7 +72,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/.NET-Semistry/mouse-front&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/ORIS-Socialite/socialite.web&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -81,11 +95,11 @@
       <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\SignIn" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Profile" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\UserProfile" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Components\SearchString" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Components\Posts" />
       <recent name="C:\ORIS-Socialite\socialite.web\src\Components\FeedComponents" />
-      <recent name="C:\ORIS-Socialite\socialite.web\src\Pages\Profile" />
     </key>
   </component>
   <component name="RunManager" selected="npm.npm start">
@@ -139,7 +153,15 @@
       <workItem from="1713683354217" duration="14881000" />
       <workItem from="1713710246194" duration="11056000" />
       <workItem from="1713773371377" duration="11755000" />
-      <workItem from="1713791523052" duration="4765000" />
+      <workItem from="1713791523052" duration="4935000" />
+      <workItem from="1713814044627" duration="628000" />
+      <workItem from="1713858865458" duration="673000" />
+      <workItem from="1713861285645" duration="2714000" />
+      <workItem from="1713867147677" duration="60000" />
+      <workItem from="1713867463148" duration="11859000" />
+      <workItem from="1713882719493" duration="7000" />
+      <workItem from="1713893859198" duration="10664000" />
+      <workItem from="1713948461362" duration="5173000" />
     </task>
     <task id="LOCAL-00001" summary="[WEB] auth">
       <option name="closed" value="true" />
@@ -165,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713695172545</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[WEB/API] bugfix">
+      <option name="closed" value="true" />
+      <created>1713796506895</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713796506895</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +205,7 @@
     <MESSAGE value="[WEB] auth" />
     <MESSAGE value="[WEB] auth system" />
     <MESSAGE value="[WEB] create post feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="[WEB] create post feature" />
+    <MESSAGE value="[WEB/API] bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="[WEB/API] bugfix" />
   </component>
 </project>

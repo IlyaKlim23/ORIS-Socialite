@@ -34,12 +34,7 @@ public class GetPostsResponseItem
     /// Файлы
     /// </summary>
     public List<GetPostsResponseItemFile> Files { get; set; } = default!;
-
-    /// <summary>
-    /// Комментарии
-    /// </summary>
-    public List<GetPostsResponseItemComment> Comments { get; set; } = default!;
-
+    
     /// <summary>
     /// Кол-во комментариев
     /// </summary>

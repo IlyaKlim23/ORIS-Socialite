@@ -17,3 +17,11 @@ export const postsClient = axios.create({
 export const filesClient = axios.create({
   baseURL: `${backendOrigin}/api/Files/`,
 })
+
+export const subscribersClient = axios.create({
+  baseURL: `${backendOrigin}/api/Subscribers/`,
+})
+
+export const commentsClient = axios.create({
+  baseURL: `${backendOrigin}/api/Comments/`
+})

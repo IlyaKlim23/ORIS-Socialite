@@ -48,6 +48,6 @@ public class SignInQueryHandler : IRequestHandler<SignInQuery, SignInResponse>
             throw new AuthorizationException();
         }
 
-        return new SignInResponse(result, token);
+        return new SignInResponse(result, user.Id, user.UserName ?? string.Empty, token);
     }
 }

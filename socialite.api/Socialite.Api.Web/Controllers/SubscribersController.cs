@@ -35,16 +35,16 @@ public class SubscribersController : BaseController
     /// Отписаться
     /// </summary>
     /// <param name="mediator"></param>
-    /// <param name="subscribeToId"></param>
+    /// <param name="unsubscribeToId"></param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns></returns>
     [Policy(PolicyConstants.IsDefaultUser)]
     [HttpPost("unsubscribe")]
     public async Task UnsubscribeToAsync(
         [FromServices] IMediator mediator,
-        [FromQuery] Guid subscribeToId,
+        [FromQuery] Guid unsubscribeToId,
         CancellationToken cancellationToken)
-        => await mediator.Send(new UnsubscribeCommand(CurrentUserId, subscribeToId), cancellationToken);
+        => await mediator.Send(new UnsubscribeCommand(CurrentUserId, unsubscribeToId), cancellationToken);
     
     /// <summary>
     /// Получить подписчиков

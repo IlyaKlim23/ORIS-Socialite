@@ -1,12 +1,12 @@
-import GetCurrentUserInfo from "../Api/UserInfo/GetCurrentUserInfo";
+import GetUserInfo from "../Api/UserInfo/GetUserInfo";
 import DownloadFile from "../Api/StaticFiles/DownloadFile";
 
 
-export default async function CurrentUserInfoAsync(){
+export default async function UserInfoAsync(userId){
     let userData
     let avatar
 
-    const response = await GetCurrentUserInfo();
+    const response = await GetUserInfo(userId);
     if (response?.data) {
         userData = response?.data;
         if (response.data?.avatarId){

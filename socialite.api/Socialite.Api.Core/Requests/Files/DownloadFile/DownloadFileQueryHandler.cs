@@ -31,8 +31,6 @@ public class DownloadFileQueryHandler : IRequestHandler<DownloadFileQuery, Downl
     /// <inheritdoc />
     public async Task<DownloadFileResponse> Handle(DownloadFileQuery request, CancellationToken cancellationToken)
     {
-        await _s3Service.CheckS3AvailabilityAsync(cancellationToken);
-
         var file = await _dbContext.Files
             .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken)
             ?? throw new EntityNotFoundException<File>(request.Id);

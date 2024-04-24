@@ -54,24 +54,6 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                     FileId = y.Id,
                     Name = y.Name,
                 }).ToList(),
-                Comments = x.Comments!.Select(y => new GetPostsResponseItemComment
-                {
-                    CommentId = y.Id,
-                    Text = y.Text,
-                    CreatedDate = y.CreateDate,
-                    Owner = new GetPostsResponseItemUser
-                    {
-                        UserId = y.Owner.Id,
-                        UserName = y.Owner.UserName!,
-                        FirstName = y.Owner.FirstName,
-                        LastName = y.Owner.LastName,
-                        Avatar = new GetPostsResponseItemFile
-                        {
-                            FileId = y.Owner.Avatar!.Id,
-                            Name = y.Owner.Avatar.Name,
-                        }
-                    }
-                }).ToList(),
                 CommentsCount = x.Comments!.Count
             })
             .OrderByDescending(x => x.CreateDate)

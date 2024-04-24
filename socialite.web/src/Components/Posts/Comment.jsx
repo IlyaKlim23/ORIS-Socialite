@@ -1,47 +1,42 @@
 import {useEffect, useState} from "react";
 import DownloadFile from "../../Api/StaticFiles/DownloadFile";
 import {SmallAvatar} from "../../Constants/Images/Avatars";
+import {ParseDateForComment} from "../../CommonServices/DateParser";
+import {userIdItem} from "../../Constants/LocalStorageItemKeys";
+import {profile} from "../../Constants/PagePaths";
 
 
 function Comment(commentData){
     const data = commentData.commentData
     const [avatar, setAvatar] = useState('')
+    const isCurrentUser = localStorage.getItem(userIdItem) === data?.owner?.userId;
+
 
     async function loadAvatar(){
-        if (data?.owner?.avatar?.fileId)
+        if (data?.owner?.avatarId)
         {
-            const result = await DownloadFile(data?.owner?.avatar?.fileId)
-            setAvatar(avatar)
+            const result = await DownloadFile(data?.owner?.avatarId)
+            if (result)
+                setAvatar(result)
         }
     }
 
     useEffect(() => {
-        loadAvatar()
+        loadAvatar().then()
     }, []);
 
     return(
         <>
-            <div
-                className="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
-
-                <div className="flex items-start gap-3 relative">
-                    <a href="profile.html"> <img
-                        src={avatar ? avatar : SmallAvatar} alt=""
-                        className="w-6 h-6 mt-1 rounded-full"/> </a>
-                    <div className="flex-1">
-                        <a href="profile.html"
-                           className="text-black font-medium inline-block dark:text-white"> Steeve </a>
-                        <p className="mt-0.5">{data.text}</p>
-                    </div>
+            <div className="flex items-start gap-3 relative">
+                <a href={isCurrentUser ? profile : `${profile}/${data?.owner?.userId}`}> <img src={avatar ? avatar : SmallAvatar} alt=""
+                    className="w-6 h-6 mt-1 rounded-full"/> </a>
+                <div className="flex-1">
+                    <a href={isCurrentUser ? profile : `${profile}/${data?.owner?.userId}`}
+                       className="text-black font-medium inline-block dark:text-white"> {data?.owner?.firstName} {data?.owner?.lastName} </a>
+                    <span
+                        className="mt-0.5 ml-1 text-xs dark:text-white/60"> {ParseDateForComment(data?.createdDate)}</span>
+                    <p className="mt-0.5">{data.text}</p>
                 </div>
-
-                <button type="button"
-                        className="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
-                    <ion-icon name="chevron-down-outline"
-                              className="ml-auto duration-200 group-aria-expanded:rotate-180"></ion-icon>
-                    More Comment
-                </button>
-
             </div>
         </>
     )

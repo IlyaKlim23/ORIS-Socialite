@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Socialite.Api.Contracts.Requests.UserProfile.GetCurrentUserInfo;
+using Socialite.Api.Contracts.Requests.UserProfile.GetUserInfo;
 using Socialite.Api.Contracts.Requests.UserProfile.PutCurrentUserInfo;
 using Socialite.Api.Core.Constants;
-using Socialite.Api.Core.Requests.UserProfile.GetCurrentUserInfo;
+using Socialite.Api.Core.Requests.UserProfile.GetUserInfo;
 using Socialite.Api.Core.Requests.UserProfile.PutCurrentUserInfo;
 using Socialite.Api.Web.Attributes;
 
@@ -15,17 +15,19 @@ namespace Socialite.Api.Web.Controllers;
 public class UserProfilesController : BaseController
 {
     /// <summary>
-    /// Получить информацию о текущем пользователе
+    /// Получить информацию о пользователе
     /// </summary>
     /// <param name="mediator"></param>
+    /// <param name="userId"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [Policy(PolicyConstants.IsDefaultUser)]
-    [HttpGet("currentUserInfo")]
-    public async Task<GetCurrentUserInfoResponse> GetCurrentUserInfoAsync(
+    [HttpGet]
+    public async Task<GetUserInfoResponse> GetUserInfoAsync(
         [FromServices] IMediator mediator,
+        [FromQuery] Guid? userId,
         CancellationToken cancellationToken)
-        => await mediator.Send(new GetCurrentUserInfoQuery(CurrentUserId), cancellationToken);
+        => await mediator.Send(new GetUserInfoQuery(userId ?? CurrentUserId, CurrentUserId), cancellationToken);
 
     /// <summary>
     /// Обновить информацию о текущем пользователе

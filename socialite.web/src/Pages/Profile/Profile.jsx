@@ -5,17 +5,21 @@ import {useEffect, useState} from "react";
 import './style/profile.css'
 import UploadFile from "../../Api/StaticFiles/UploadFile";
 import UpdateUserInfo from "../../Api/UserInfo/UpdateUserInfo";
-import CurrentUserInfoAsync from "../../CommonServices/CurrentUserInfo";
+import UserInfoAsync from "../../CommonServices/UserInfo";
 import CreatePostByCurrentUser from "../../Api/Posts/CreatePostByCurrentUser";
 import Posts from "../../Components/Posts/Posts";
+import {useParams} from "react-router-dom";
+import {Subscribe, Unsubscribe} from "../../Api/SubscribeSystem/Subscribe";
 
 export default function Profile(){
+    const userId = useParams().userId
+    const isCurrentUser = userId === undefined
     const [userData, setUserData] = useState({});
     const [avatar, setAvatar] = useState('');
     const [postFiles, setPostFiles] = useState([])
 
     async function loadProfile(){
-        const result = await CurrentUserInfoAsync()
+        const result = await UserInfoAsync(userId)
         setUserData(result?.userData)
         setAvatar(result?.avatar)
     }
@@ -56,10 +60,10 @@ export default function Profile(){
             setPostFiles(oldArray => [...oldArray, file])
     }
 
-    const postFileNames = postFiles.map(x => {
+    const postFileNames = postFiles.map((x, index) => {
         return(
             <>
-                <div className="post-profile-photo relative overflow-hidden rounded-2xl border-gray-100 shrink-0 shadow border-2 dark:bg-sky-950">
+                <div key={index} className="post-profile-photo relative overflow-hidden rounded-2xl border-gray-100 shrink-0 shadow border-2 dark:bg-sky-950">
                     <img className="small-cropped" alt="" src={URL.createObjectURL(x)}></img>
                 </div>
             </>
@@ -97,7 +101,6 @@ export default function Profile(){
 
     async function onPostCreate(){
         const uploadFilesResult = await UploadFile(postFiles)
-        console.log(uploadFilesResult)
         const fileIds = postFiles.length > 0 ? Object.values(uploadFilesResult.data.files) : []
 
         const postCreate = await CreatePostByCurrentUser({
@@ -109,6 +112,18 @@ export default function Profile(){
             // eslint-disable-next-line no-restricted-globals
             location.reload()
         }
+    }
+
+    async function onSubscribe(){
+        const result = await Subscribe(userId)
+        if (result)
+            await loadProfile()
+    }
+
+    async function onUnsubscribe(){
+        const result = await Unsubscribe(userId)
+        if (result)
+            await loadProfile()
     }
 
     useEffect(() => {
@@ -151,22 +166,42 @@ export default function Profile(){
                                         <input type='file' id='avatar-input'
                                                onChange={e => uploadAvatarInServer(e.target.files[0])}
                                                style={{display: "none"}}></input>
-                                        <button type="button"
-                                                onClick={clickOnAvatarInput}
-                                                className="absolute -bottom-3 left-1/2 -translate-x-1/2 dark:bg-dark15 shadow p-1.5 rounded-full sm:flex hidden">
-                                            <ion-icon name="camera" className="text-2xl md hydrated" role="img"
-                                                      aria-label="camera"></ion-icon>
-                                        </button>
+                                        {
+                                            isCurrentUser
+                                                ?
+                                                <>
+                                                    <button type="button"
+                                                            onClick={clickOnAvatarInput}
+                                                            className="absolute -bottom-3 left-1/2 -translate-x-1/2 dark:bg-dark15 shadow p-1.5 rounded-full sm:flex hidden">
+                                                        <ion-icon name="camera" className="text-2xl md hydrated"
+                                                                  role="img"
+                                                                  aria-label="camera"></ion-icon>
+                                                    </button>
+                                                </>
+                                                : <></>
+                                        }
                                     </div>
 
                                     <h3 className="md:text-3xl text-base font-bold text-black dark:text-white"> {userData.firstName} {userData.lastName} </h3>
                                     <p className="mt-2 text-gray-400">@{userData.userName}</p>
-                                    <div className="w-1/2" style={{wordWrap:"break-word"}}>
-                                        <p className="mt-2 text-gray-500 dark:text-white/80 text-center">{userData.status}&nbsp;&nbsp;
-                                            <a
-                                                href="#" className="text-blue-500 inline-block"
-                                                uk-toggle="target: #change-profile-status"> {userData.status ? "Изменить" : "Похоже у вас нет статуса. Добавить?"} </a>
-                                        </p>
+                                    <div className="w-1/2" style={{wordWrap: "break-word"}}>
+                                        {
+                                            userData.status || isCurrentUser
+                                            ? <>
+                                                    <p className="mt-2 text-gray-500 dark:text-white/80 text-center">{userData.status}&nbsp;&nbsp;
+                                                        {isCurrentUser
+                                                            ? <>
+                                                                <a
+                                                                    href="#" className="text-blue-500 inline-block"
+                                                                    uk-toggle="target: #change-profile-status"> {userData.status ? "Изменить" : "Похоже у вас нет статуса. Добавить?"}
+                                                                </a>
+                                                              </>
+                                                            : <></>}
+                                                    </p>
+                                                </>
+                                            : <></>
+                                        }
+
                                     </div>
                                 </div>
 
@@ -177,14 +212,33 @@ export default function Profile(){
                                 className="flex items-center justify-between mt-3 border-t border-gray-100 px-2 max-lg:flex-col dark:border-slate-700"
                                 uk-sticky="offset:50; cls-active: bg-white/80 shadow rounded-b-2xl z-50 backdrop-blur-xl dark:!bg-slate-700/80; animation:uk-animation-slide-top ; media: 992">
                                 <div className="flex items-center gap-2 text-sm py-2 pr-1 max-md:w-full lg:order-2">
-                                    <button
-                                        className="button bg-primary flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
-                                        <ion-icon name="add-circle" className="text-xl"></ion-icon>
-                                        <span className="text-sm"> Добавить историю  </span>
-                                    </button>
+                                    {
+                                        isCurrentUser
+                                            ? <button
+                                                className="button bg-primary flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
+                                                <ion-icon name="add-circle" className="text-xl"></ion-icon>
+                                                <span className="text-sm"> Добавить историю </span>
+                                            </button>
+                                            : userData.isSubscribeTo === true ?
+                                                <button
+                                                    onClick={onUnsubscribe}
+                                                    className="button dark:!bg-white/10 flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
+                                                    <ion-icon name="checkmark-circle"
+                                                              className="text-xl"></ion-icon>
+                                                    <span className="text-sm"> Отписаться  </span>
+                                                </button>
+                                                :<button
+                                                    onClick={onSubscribe}
+                                                    className="button bg-primary flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
+                                                    <ion-icon name="checkmark-circle-outline"
+                                                              className="text-xl"></ion-icon>
+                                                    <span className="text-sm"> Подписаться  </span>
+                                                </button>
+                                    }
+
                                     <div>
                                         <button type="submit"
-                                                className="rounded-lg bg-secondery flex px-2.5 py-2 dark:bg-dark3">
+                                                className="rounded-lg dark:!bg-white/10 flex px-2.5 py-2 dark:bg-dark3">
                                             <ion-icon name="ellipsis-horizontal" className="text-xl"></ion-icon>
                                         </button>
                                         <div className="w-[240px]"
@@ -200,9 +254,10 @@ export default function Profile(){
                                 <nav
                                     className="flex gap-0.5 rounded-xl -mb-px text-gray-600 font-medium text-[15px]  dark:text-white max-md:w-full max-md:overflow-x-auto">
                                     <a href="#"
-                                       className="inline-block  py-3 leading-8 px-3.5 border-b-2 border-blue-600 text-blue-600">Мои посты</a>
+                                       className="inline-block  py-3 leading-8 px-3.5 border-b-2 border-blue-600 text-blue-600">
+                                        Посты</a>
                                     <a href="#" className="inline-block py-3 leading-8 px-3.5">Друзья <span
-                                        className="text-xs pl-2 font-normal lg:inline-block hidden">2,680</span></a>
+                                        className="text-xs pl-2 font-normal lg:inline-block hidden">{userData.friendCount}</span></a>
                                 </nav>
                             </div>
                         </div>
@@ -213,22 +268,25 @@ export default function Profile(){
 
                             <div className="flex-1 xl:space-y-6 space-y-3">
 
-                                {/* add post */}
-                                <div
-                                    className="bg-white rounded-xl shadow-sm p-4 space-y-4 text-sm font-medium border1 dark:bg-dark15">
-                                    <div className="flex items-center gap-3">
+                                {isCurrentUser
+                                ? <>
+                                        {/* add post */}
                                         <div
-                                            className="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3"
-                                            uk-toggle="target: #create-status">
-                                            <div className="py-2.5 text-center dark:text-white"> Создать новый пост
+                                            className="bg-white rounded-xl shadow-sm p-4 space-y-4 text-sm font-medium border1 dark:bg-dark15">
+                                            <div className="flex items-center gap-3">
+                                                <div
+                                                    className="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3"
+                                                    uk-toggle="target: #create-status">
+                                                    <div className="py-2.5 text-center dark:text-white"> Создать новый пост
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                  </>
+                                : <></>}
 
                                 {/*POST*/}
-                                <Posts userId={null}/>
-
+                                <Posts userId={userId}/>
                             </div>
 
                             {/* sidebar */}
@@ -242,7 +300,11 @@ export default function Profile(){
 
                                         <div className="flex items-ce justify-between text-black dark:text-white">
                                             <h3 className="font-bold text-lg"> Информация </h3>
-                                            <a href="#" uk-toggle="target: #change-intro" className="text-sm text-blue-500">Изменить</a>
+                                            {isCurrentUser
+                                                ? <a href="#" uk-toggle="target: #change-intro"
+                                                   className="text-sm text-blue-500">Изменить</a>
+                                                :<></>}
+
                                         </div>
 
                                         <ul className="text-gray-700 space-y-4 mt-4 text-sm dark:text-white/80">
@@ -300,6 +362,16 @@ export default function Profile(){
                                                     className="font-semibold text-black dark:text-white"> {userData.subscribersCount} </span>
                                                 </div>
                                             </li>
+                                            <li className="flex items-center gap-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                     stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
+                                                </svg>
+                                                <div> Кол-во подписок: <span
+                                                    className="font-semibold text-black dark:text-white"> {userData.subscriberToCount} </span>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -321,7 +393,7 @@ export default function Profile(){
                               d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"></path>
                     </svg>
 
-                        <div className="text-base font-semibold max-sm:hidden">Чат</div>
+                    <div className="text-base font-semibold max-sm:hidden">Чат</div>
 
                     <svg className="w-6 h-6 -mr-1 hidden group-aria-expanded:block" xmlns="http://www.w3.org/2000/svg"
                          viewBox="0 0 24 24" fill="currentColor">
@@ -606,13 +678,8 @@ export default function Profile(){
                                         <div> Alexa stella</div>
                                     </div>
                                 </a>
-
-
                             </div>
-
                         </div>
-
-
                     </div>
 
                     <div className="w-3.5 h-3.5 absolute -bottom-2 right-5 bg-white rotate-45 dark:bg-dark3"></div>
@@ -749,20 +816,21 @@ export default function Profile(){
                     <div className="flex items-center gap-2 text-sm py-2 px-4 font-medium flex-wrap">
                         {
                             postFileNames.length < 3
-                            ? <button type="button"
-                                      onClick={clickOnPostFileInput}
-                                      className="flex items-center gap-1.5 bg-sky-50 text-sky-600 rounded-2xl py-5 px-5 border-2 border-sky-100 dark:bg-sky-950 dark:border-sky-900 add-image-button">
-                                <ion-icon name="image" className="text-base"></ion-icon>
-                              </button>
-                            : <></>
+                                ? <button type="button"
+                                          onClick={clickOnPostFileInput}
+                                          className="flex items-center gap-1.5 bg-sky-50 text-sky-600 rounded-2xl py-5 px-5 border-2 border-sky-100 dark:bg-sky-950 dark:border-sky-900 add-image-button">
+                                    <ion-icon name="image" className="text-base"></ion-icon>
+                                </button>
+                                : <></>
                         }
                         <div className="post-profile-block">
                             {postFileNames}
                         </div>
                     </div>
 
+
                     <div className="p-5 flex justify-between items-center">
-                    <div>
+                        <div>
                             <div
                                 className="p-2 bg-white rounded-lg shadow-lg text-black font-medium border border-slate-100 w-60 dark:bg-slate-700"
                                 uk-drop="offset:10;pos: bottom-left; reveal-left;animate-out: true; animation: uk-animation-scale-up uk-transform-origin-bottom-left ; mode:click">

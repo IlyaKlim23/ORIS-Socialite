@@ -16,7 +16,7 @@ export async function signIn(signInData) {
               let token = result.data.jwtToken;
               localStorage.setItem(authToken, token);
               localStorage.setItem(userIdItem, result.data.userId);
-              localStorage.setItem(userNameItem, result.data.firstName);
+              localStorage.setItem(userNameItem, result.data.userName);
               console.log(result);
               return ""
           })

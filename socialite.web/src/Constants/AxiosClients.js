@@ -25,3 +25,13 @@ export const subscribersClient = axios.create({
 export const commentsClient = axios.create({
   baseURL: `${backendOrigin}/api/Comments/`
 })
+
+export const chatClient = axios.create({
+  baseURL: `${backendOrigin}/api/Chat/`
+})
+
+export const messagesClient = axios.create({
+  baseURL: `${backendOrigin}/api/Messages/`
+})
+
+export const chatUrl = `${backendOrigin}/chat`

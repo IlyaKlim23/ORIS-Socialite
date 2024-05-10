@@ -28,6 +28,8 @@ public class User: IdentityUser<Guid>
         CreatedPosts = new List<Post>();
         LikedPosts = new List<Post>();
         Comments = new List<Comment>();
+        Chats = new List<Chat>();
+        Messages = new List<Message>();
     }
 
     /// <summary>
@@ -122,4 +124,14 @@ public class User: IdentityUser<Guid>
     /// Созданные комментарии
     /// </summary>
     public List<Comment> Comments { get; set; }
+
+    /// <summary>
+    /// Чаты с пользователем
+    /// </summary>
+    public List<Chat> Chats { get; set; }
+
+    /// <summary>
+    /// Сообщения
+    /// </summary>
+    public List<Message> Messages { get; set; }
 }

@@ -11,24 +11,37 @@ namespace Socialite.Api.Core.Requests.Post.GetPosts;
 public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsResponse>
 {
     private readonly IDbContext _dbContext;
+    private readonly IUserService _userService;
 
     /// <summary>
     /// Конструктор
     /// </summary>
     /// <param name="dbContext">Контекст EF Core для приложения</param>
-    public GetPostsQueryHandler(IDbContext dbContext)
+    /// <param name="userService">Сервис для работы с пользователем</param>
+    public GetPostsQueryHandler(IDbContext dbContext, IUserService userService)
     {
         _dbContext = dbContext;
+        _userService = userService;
     }
 
     /// <inheritdoc />
     public async Task<GetPostsResponse> Handle(GetPostsQuery request, CancellationToken cancellationToken)
     {
-        var query = _dbContext.Posts
-            .Where(x => x.OwnerId == request.UserId);
+        List<Guid>? subscribedUserIds = null;
+        
+        if (request.IsFollowingPosts)
+        {
+            subscribedUserIds = await _userService.Users()
+                .Where(x => x.Subscribers.Select(x => x.Id).Contains(request.UserId))
+                .Select(x => x.Id)
+                .ToListAsync(cancellationToken);
+        }
+        
+        var query = subscribedUserIds == null
+            ? _dbContext.Posts.Where(x => x.OwnerId == request.UserId)
+            : _dbContext.Posts.Where(x => subscribedUserIds.Contains(x.OwnerId));
             
         var posts = await query
-            .Where(x => x.OwnerId == request.UserId)
             .Select(x => new GetPostsResponseItem
             {
                 PostId = x.Id,

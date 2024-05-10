@@ -3,13 +3,14 @@ import GetPostsByUser from "../../Api/Posts/GetPostsByUser";
 import Post from "./Post";
 import UserInfoAsync from "../../CommonServices/UserInfo";
 
-function Posts(userId){
+function Posts({userId, isFollowingPosts}){
     const [posts, setPosts] = useState([])
     const [currentUserInfo, setCurrentUserInfo] = useState({})
 
     async function loadPosts(){
-        const result = await GetPostsByUser(userId.userId)
-        setPosts(result.data.posts)
+        const result = await GetPostsByUser(userId, isFollowingPosts)
+        if (typeof result !== "string")
+            setPosts(result?.data?.posts)
     }
 
     async function loadCurrentUserInfo(){
@@ -21,16 +22,18 @@ function Posts(userId){
     }
 
     useEffect(() => {
-        loadPosts()
-        if (userId.userId !== undefined)
-            loadCurrentUserInfo()
+        loadPosts().then()
+        if (userId !== undefined || isFollowingPosts)
+            loadCurrentUserInfo().then()
     }, []);
 
     return(
         <>
-            {posts.map((info) => <Post
+            {posts.map((info, index) => <Post
+                key={index}
                 postData={info}
-                isCurrentUser={userId.userId === undefined}
+                isCurrentUser={userId === undefined}
+                isFollowingPosts = {isFollowingPosts}
                 currentUserInfo={currentUserInfo}/>)}
 
             <div className="mt-3"></div>

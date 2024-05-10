@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
+using SixLabors.ImageSharp;
 using Socialite.Api.Contracts.Requests.Files.UploadFiles;
 using Socialite.Api.Core.Interfaces;
 using Socialite.Api.Core.Managers;
@@ -36,10 +38,23 @@ public class UploadFilesCommandHandler : IRequestHandler<UploadFilesCommand, Upl
         var result = new Dictionary<string, Guid>();
         foreach (var file in filesToAdd)
         {
-            var fileToAdd = new File(file.Name ?? string.Empty, file.FileStream.Length, file.ContentType);
+            Stream stream;
+            try
+            {
+                stream = await ImageManager.ResizeImage(file.FileStream);
+            }
+            catch (UnknownImageFormatException e)
+            {
+                throw new ValidationException("Неподдерживаемый формат файла");
+            }
+            catch (NotSupportedException e)
+            {
+                throw new ValidationException("Неподдерживаемый формат изображения");
+            }
+            var fileToAdd = new File(file.Name ?? string.Empty, stream.Length, file.ContentType);
             _dbContext.Files.Add(fileToAdd);
             await _dbContext.SaveChangesAsync(cancellationToken);
-            await _s3Service.AddFileInBucketAsync(file.FileStream, fileToAdd.Id, fileToAdd.Extension ?? string.Empty, cancellationToken);
+            await _s3Service.AddFileInBucketAsync(stream, fileToAdd.Id, fileToAdd.Extension ?? string.Empty, cancellationToken);
             result[file.Name ?? fileToAdd.Id.ToString()] = fileToAdd.Id;
         }
 

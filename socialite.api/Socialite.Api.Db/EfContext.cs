@@ -42,6 +42,11 @@ public class EfContext: IdentityDbContext<User, Role, Guid>, IDbContext
     public DbSet<Comment> Comments { get; set; }
 
     /// <inheritdoc />
+    public DbSet<Chat> Chats { get; set; }
+
+    /// <inheritdoc />
+    public DbSet<Message> Messages { get; set; }
+
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
         await SaveChangesAsync(true, cancellationToken);
 }

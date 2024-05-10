@@ -21,6 +21,7 @@ public class PostsController : BaseController
     /// </summary>
     /// <param name="mediator"></param>
     /// <param name="userId"></param>
+    /// <param name="isFollowingPosts"></param>
     /// <param name="request"></param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns></returns>
@@ -29,9 +30,10 @@ public class PostsController : BaseController
     public async Task<GetPostsResponse> GetPostsAsync(
         [FromServices] IMediator mediator,
         [FromQuery] Guid? userId,
+        [FromQuery] bool isFollowingPosts,
         [FromQuery] GetPostsRequest request,
         CancellationToken cancellationToken)
-        => await mediator.Send(new GetPostsQuery(userId ?? CurrentUserId), cancellationToken);
+        => await mediator.Send(new GetPostsQuery(userId ?? CurrentUserId, isFollowingPosts), cancellationToken);
 
     /// <summary>
     /// Создать пост

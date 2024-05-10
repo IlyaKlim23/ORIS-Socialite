@@ -12,13 +12,19 @@ public class GetPostsQuery : GetPostsRequest, IRequest<GetPostsResponse>
     /// Конструктор
     /// </summary>
     /// <param name="userId">Пользователь</param>
-    public GetPostsQuery(Guid userId)
+    public GetPostsQuery(Guid userId, bool isFollowingPosts)
     {
         UserId = userId;
+        IsFollowingPosts = isFollowingPosts;
     }
 
     /// <summary>
     /// Пользователь
     /// </summary>
     public Guid UserId { get; set; }
+
+    /// <summary>
+    /// Посты людей, на которых подписан пользователь
+    /// </summary>
+    public bool IsFollowingPosts { get; set; }
 }

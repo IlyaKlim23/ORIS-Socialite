@@ -51,8 +51,9 @@ public static class WebApplicationBuilderExtensions
     /// <param name="builder">WebApplicationBuilder</param>
     public static void ConfigureCore(this WebApplicationBuilder builder)
     {
-        builder.Services.AddScoped<IDbContext, EfContext>();
         builder.Services.AddMediatR(typeof(EntityBase).Assembly);
+        
+        builder.Services.AddScoped<IDbContext, EfContext>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddSingleton<IJwtService, JwtService>();
         builder.Services.AddSingleton<IS3Service, S3Service>();
@@ -91,6 +92,7 @@ public static class WebApplicationBuilderExtensions
                         .SetIsOriginAllowedToAllowWildcardSubdomains();
                 });
         });
+        builder.Services.AddSignalR();
     }
 
     /// <summary>

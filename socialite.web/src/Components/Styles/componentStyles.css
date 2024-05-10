@@ -20,6 +20,23 @@
     color: #A66;
 }
 
+.errorToast{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: auto;
+    min-width: 200px;
+    height: auto;
+    z-index:1000;
+    opacity: 0;
+    animation: ani 0.7s forwards;
+    transform: translate(-50%,-50%);
+}
+@keyframes ani {
+    0% {transform: translate(-50%,-50%); opacity: 0;}
+    100% {transform: translate(-50%,0%); opacity: 1;}
+}
+
 .alertText {
     display: table;
     margin: 0 auto;
@@ -45,4 +62,7 @@
 .nav-button{
     transition: opacity 0.5s;
     opacity: 0;
+}
+
+.messages{
 }

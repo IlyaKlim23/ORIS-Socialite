@@ -10,6 +10,8 @@ import CreatePostByCurrentUser from "../../Api/Posts/CreatePostByCurrentUser";
 import Posts from "../../Components/Posts/Posts";
 import {useParams} from "react-router-dom";
 import {Subscribe, Unsubscribe} from "../../Api/SubscribeSystem/Subscribe";
+import JoinChat from "../../Api/Chat/JoinChat";
+import ErrorToast from "../../Components/ErrorToast";
 
 export default function Profile(){
     const userId = useParams().userId
@@ -17,11 +19,16 @@ export default function Profile(){
     const [userData, setUserData] = useState({});
     const [avatar, setAvatar] = useState('');
     const [postFiles, setPostFiles] = useState([])
+    const [errorMessage, setErrorMessage] = useState('')
 
     async function loadProfile(){
         const result = await UserInfoAsync(userId)
-        setUserData(result?.userData)
-        setAvatar(result?.avatar)
+        if (typeof result === 'string')
+            setErrorMessage(result)
+        else {
+            setUserData(result?.userData)
+            setAvatar(result?.avatar)
+        }
     }
 
     async function uploadAvatarInServer(file){
@@ -32,11 +39,11 @@ export default function Profile(){
             {
                 const avatarChange = await UpdateUserInfo({
                     avatarId: avatarId,
-                    status: userData.status,
-                    placeOfLiving: userData.placeOfLiving,
-                    placeOfWork: userData.placeOfWork,
-                    placeOfStudy: userData.placeOfStudy,
-                    maritalStatus: userData.maritalStatus
+                    status: userData?.status,
+                    placeOfLiving: userData?.placeOfLiving,
+                    placeOfWork: userData?.placeOfWork,
+                    placeOfStudy: userData?.placeOfStudy,
+                    maritalStatus: userData?.maritalStatus
                 })
                 if (avatarChange){
                     await loadProfile()
@@ -54,6 +61,10 @@ export default function Profile(){
     const clickOnPostFileInput = () => {
         document.getElementById('post-file-input').click()
     };
+
+    const seeError = () => {
+        setErrorMessage('fkv')
+    }
 
     const pushPostFile = (file) => {
         if (file)
@@ -73,12 +84,12 @@ export default function Profile(){
     async function onChangeStatus(){
         const text = document.getElementById('profile_status_textarea').value
         const statusChange = await UpdateUserInfo({
-            avatarId: userData.avatarId,
+            avatarId: userData?.avatarId,
             status: text,
-            placeOfLiving: userData.placeOfLiving,
-            placeOfWork: userData.placeOfWork,
-            placeOfStudy: userData.placeOfStudy,
-            maritalStatus: userData.maritalStatus,
+            placeOfLiving: userData?.placeOfLiving,
+            placeOfWork: userData?.placeOfWork,
+            placeOfStudy: userData?.placeOfStudy,
+            maritalStatus: userData?.maritalStatus,
         })
         if (statusChange)
             await loadProfile()
@@ -86,13 +97,13 @@ export default function Profile(){
 
     async function onChangeIntro(){
         const introChange = await UpdateUserInfo({
-            avatarId: userData.avatarId,
-            status: userData.status,
+            avatarId: userData?.avatarId,
+            status: userData?.status,
             placeOfLiving: document.getElementById('living_place_input').value,
             placeOfWork: document.getElementById('working_place_input').value,
             placeOfStudy: document.getElementById('studying_place_input').value,
             maritalStatus: document.getElementById('marital-status-input').value === "true"
-                ? userData.maritalStatus
+                ? userData?.maritalStatus
                 : document.getElementById('marital-status-input').value,
         })
         if (introChange)
@@ -126,16 +137,26 @@ export default function Profile(){
             await loadProfile()
     }
 
+    async function onJoinChat(){
+        const connection = await JoinChat(userId)
+        if (connection)
+            console.log(connection)
+    }
+
     useEffect(() => {
         loadProfile()
     }, []);
 
     return (
         <>
+
+            <div onClick={() => {setErrorMessage('')}}>
+                <ErrorToast message={errorMessage}/>
+            </div>
             <Sidebar/>
             <Header/>
             <div id="wrapper">
-                <div id="sidebar"></div>
+
                 {/* main contents */}
                 <main id="site__main"
                       className="2xl:ml-[--w-side]  xl:ml-[--w-side-sm] p-2.5 h-[calc(100vh-var(--m-top))] mt-[--m-top]">
@@ -160,10 +181,11 @@ export default function Profile(){
                                     <div className="relative mb-4 z-10">
                                         <div
                                             className="relative overflow-hidden rounded-full md:border-[6px] border-gray-100 shrink-0 dark:border-slate-900 shadow">
-                                            <img src={avatar ? avatar : SmallAvatar} alt=""
+                                            <img src={avatar ? avatar : SmallAvatar} alt="" onClick={() => seeError()}
                                                  className="cropped"/>
                                         </div>
                                         <input type='file' id='avatar-input'
+                                               accept="image/*"
                                                onChange={e => uploadAvatarInServer(e.target.files[0])}
                                                style={{display: "none"}}></input>
                                         {
@@ -182,24 +204,24 @@ export default function Profile(){
                                         }
                                     </div>
 
-                                    <h3 className="md:text-3xl text-base font-bold text-black dark:text-white"> {userData.firstName} {userData.lastName} </h3>
-                                    <p className="mt-2 text-gray-400">@{userData.userName}</p>
+                                    <h3 className="md:text-3xl text-base font-bold text-black dark:text-white"> {userData?.firstName} {userData?.lastName} </h3>
+                                    <p className="mt-2 text-gray-400">@{userData?.userName}</p>
                                     <div className="w-1/2" style={{wordWrap: "break-word"}}>
                                         {
-                                            userData.status || isCurrentUser
-                                            ? <>
-                                                    <p className="mt-2 text-gray-500 dark:text-white/80 text-center">{userData.status}&nbsp;&nbsp;
+                                            userData?.status || isCurrentUser
+                                                ? <>
+                                                    <p className="mt-2 text-gray-500 dark:text-white/80 text-center">{userData?.status}&nbsp;&nbsp;
                                                         {isCurrentUser
                                                             ? <>
                                                                 <a
                                                                     href="#" className="text-blue-500 inline-block"
-                                                                    uk-toggle="target: #change-profile-status"> {userData.status ? "Изменить" : "Похоже у вас нет статуса. Добавить?"}
+                                                                    uk-toggle="target: #change-profile-status"> {userData?.status ? "Изменить" : "Похоже у вас нет статуса. Добавить?"}
                                                                 </a>
-                                                              </>
+                                                            </>
                                                             : <></>}
                                                     </p>
                                                 </>
-                                            : <></>
+                                                : <></>
                                         }
 
                                     </div>
@@ -212,6 +234,22 @@ export default function Profile(){
                                 className="flex items-center justify-between mt-3 border-t border-gray-100 px-2 max-lg:flex-col dark:border-slate-700"
                                 uk-sticky="offset:50; cls-active: bg-white/80 shadow rounded-b-2xl z-50 backdrop-blur-xl dark:!bg-slate-700/80; animation:uk-animation-slide-top ; media: 992">
                                 <div className="flex items-center gap-2 text-sm py-2 pr-1 max-md:w-full lg:order-2">
+
+                                    {
+                                        isCurrentUser
+                                            ? <>
+                                            </>
+                                            : <>
+                                                <button
+                                                    onClick={onJoinChat}
+                                                    className="button dark:!bg-white/5 flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
+                                                    <ion-icon name="mail"
+                                                              className="text-xl"></ion-icon>
+                                                    <span className="text-sm"> Сообщение </span>
+                                                </button>
+                                            </>
+                                    }
+
                                     {
                                         isCurrentUser
                                             ? <button
@@ -219,7 +257,7 @@ export default function Profile(){
                                                 <ion-icon name="add-circle" className="text-xl"></ion-icon>
                                                 <span className="text-sm"> Добавить историю </span>
                                             </button>
-                                            : userData.isSubscribeTo === true ?
+                                            : userData?.isSubscribeTo === true ?
                                                 <button
                                                     onClick={onUnsubscribe}
                                                     className="button dark:!bg-white/10 flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
@@ -227,7 +265,7 @@ export default function Profile(){
                                                               className="text-xl"></ion-icon>
                                                     <span className="text-sm"> Отписаться  </span>
                                                 </button>
-                                                :<button
+                                                : <button
                                                     onClick={onSubscribe}
                                                     className="button bg-primary flex items-center gap-2 text-white py-2 px-3.5 max-md:flex-1">
                                                     <ion-icon name="checkmark-circle-outline"
@@ -257,7 +295,7 @@ export default function Profile(){
                                        className="inline-block  py-3 leading-8 px-3.5 border-b-2 border-blue-600 text-blue-600">
                                         Посты</a>
                                     <a href="#" className="inline-block py-3 leading-8 px-3.5">Друзья <span
-                                        className="text-xs pl-2 font-normal lg:inline-block hidden">{userData.friendCount}</span></a>
+                                        className="text-xs pl-2 font-normal lg:inline-block hidden">{userData?.friendCount}</span></a>
                                 </nav>
                             </div>
                         </div>
@@ -269,7 +307,7 @@ export default function Profile(){
                             <div className="flex-1 xl:space-y-6 space-y-3">
 
                                 {isCurrentUser
-                                ? <>
+                                    ? <>
                                         {/* add post */}
                                         <div
                                             className="bg-white rounded-xl shadow-sm p-4 space-y-4 text-sm font-medium border1 dark:bg-dark15">
@@ -277,16 +315,17 @@ export default function Profile(){
                                                 <div
                                                     className="flex-1 bg-slate-100 hover:bg-opacity-80 transition-all rounded-lg cursor-pointer dark:bg-dark3"
                                                     uk-toggle="target: #create-status">
-                                                    <div className="py-2.5 text-center dark:text-white"> Создать новый пост
+                                                    <div className="py-2.5 text-center dark:text-white"> Создать новый
+                                                        пост
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                  </>
-                                : <></>}
+                                    </>
+                                    : <></>}
 
                                 {/*POST*/}
-                                <Posts userId={userId}/>
+                                <Posts userId={userId} isFollowingPosts={false}/>
                             </div>
 
                             {/* sidebar */}
@@ -302,8 +341,8 @@ export default function Profile(){
                                             <h3 className="font-bold text-lg"> Информация </h3>
                                             {isCurrentUser
                                                 ? <a href="#" uk-toggle="target: #change-intro"
-                                                   className="text-sm text-blue-500">Изменить</a>
-                                                :<></>}
+                                                     className="text-sm text-blue-500">Изменить</a>
+                                                : <></>}
 
                                         </div>
 
@@ -318,7 +357,7 @@ export default function Profile(){
                                                           d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
                                                 </svg>
                                                 <div> Место проживания: <span
-                                                    className="font-semibold text-black dark:text-white"> {userData.placeOfLiving ?? "-"} </span>
+                                                    className="font-semibold text-black dark:text-white"> {userData?.placeOfLiving ?? "-"} </span>
                                                 </div>
                                             </li>
                                             <li className="flex items-center gap-3">
@@ -328,7 +367,7 @@ export default function Profile(){
                                                           d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
                                                 </svg>
                                                 <div> Образование: <span
-                                                    className="font-semibold text-black dark:text-white"> {userData.placeOfStudy ?? "-"}  </span>
+                                                    className="font-semibold text-black dark:text-white"> {userData?.placeOfStudy ?? "-"}  </span>
                                                 </div>
                                             </li>
                                             <li className="flex items-center gap-3">
@@ -339,7 +378,7 @@ export default function Profile(){
                                                 </svg>
 
                                                 <div> Место работы: <span
-                                                    className="font-semibold text-black dark:text-white">  {userData.placeOfWork ?? "-"} </span>
+                                                    className="font-semibold text-black dark:text-white">  {userData?.placeOfWork ?? "-"} </span>
                                                 </div>
                                             </li>
                                             <li className="flex items-center gap-3">
@@ -349,7 +388,7 @@ export default function Profile(){
                                                           d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
                                                 </svg>
                                                 <div> Семейное положение: <span
-                                                    className="font-semibold text-black dark:text-white"> {userData.maritalStatus ?? "-"}  </span>
+                                                    className="font-semibold text-black dark:text-white"> {userData?.maritalStatus ?? "-"}  </span>
                                                 </div>
                                             </li>
                                             <li className="flex items-center gap-3">
@@ -359,7 +398,7 @@ export default function Profile(){
                                                           d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/>
                                                 </svg>
                                                 <div> Кол-во подписчиков: <span
-                                                    className="font-semibold text-black dark:text-white"> {userData.subscribersCount} </span>
+                                                    className="font-semibold text-black dark:text-white"> {userData?.subscribersCount} </span>
                                                 </div>
                                             </li>
                                             <li className="flex items-center gap-3">
@@ -369,7 +408,7 @@ export default function Profile(){
                                                           d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/>
                                                 </svg>
                                                 <div> Кол-во подписок: <span
-                                                    className="font-semibold text-black dark:text-white"> {userData.subscriberToCount} </span>
+                                                    className="font-semibold text-black dark:text-white"> {userData?.subscriberToCount} </span>
                                                 </div>
                                             </li>
                                         </ul>
@@ -702,17 +741,17 @@ export default function Profile(){
                     </div>
                     <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
                         <input id="living_place_input" placeholder="Live in" type={"text"}
-                               defaultValue={userData.placeOfLiving}
+                               defaultValue={userData?.placeOfLiving}
                                className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
                     </div>
                     <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
                         <input id="studying_place_input" placeholder="Studied at" type={"text"}
-                               defaultValue={userData.placeOfStudy}
+                               defaultValue={userData?.placeOfStudy}
                                className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
                     </div>
                     <div className="space-y-5 mt-3 ml-3 mr-3 p-2">
                         <input id="working_place_input" placeholder="Work at" type={"text"}
-                               defaultValue={userData.placeOfWork}
+                               defaultValue={userData?.placeOfWork}
                                className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"/>
                     </div>
 
@@ -762,7 +801,7 @@ export default function Profile(){
                             className="w-full !text-black placeholder:!text-black !bg-white !border-transparent focus:!border-transparent focus:!ring-transparent !font-normal !text-xl   dark:!text-white dark:placeholder:!text-white dark:!bg-slate-800"
                             name="" id="profile_status_textarea" rows="6"
                             maxLength={250}
-                            placeholder="Your status">{userData.status}</textarea>
+                            placeholder="Your status">{userData?.status}</textarea>
                     </div>
                     <div className="p-5 flex justify-between items-center">
                         <div>

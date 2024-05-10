@@ -1,4 +1,4 @@
-import {feed} from "../Constants/PagePaths";
+import {feed, messages} from "../Constants/PagePaths";
 import feedLogo from "../Sources/Images/Icons/home.png"
 import messagesLogo from "../Sources/Images/Icons/messages.png"
 import "./Styles/componentStyles.css"
@@ -23,7 +23,7 @@ function Sidebar(currentPage) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="messages.html">
+                                    <a href={messages}>
                                         <img src={messagesLogo} alt="messages" className="w-6"/>
                                         <span> Messages </span>
                                     </a>

@@ -56,9 +56,9 @@ public class SubscribersController : BaseController
     [HttpGet("subscribers")]
     public async Task<GetSubscribersResponse> GetSubscribersAsync(
         [FromServices] IMediator mediator,
-        [FromQuery] Guid userId,
+        [FromQuery] Guid? userId,
         CancellationToken cancellationToken)
-        => await mediator.Send(new GetSubscribersQuery(userId), cancellationToken);
+        => await mediator.Send(new GetSubscribersQuery(userId ?? CurrentUserId), cancellationToken);
     
     /// <summary>
     /// Получить подписки
@@ -70,7 +70,7 @@ public class SubscribersController : BaseController
     [HttpGet("subscriptions")]
     public async Task<GetSubscribedToResponse> GetSubscribedToAsync(
         [FromServices] IMediator mediator,
-        [FromQuery] Guid userId,
+        [FromQuery] Guid? userId,
         CancellationToken cancellationToken)
-        => await mediator.Send(new GetSubscribedToQuery(userId), cancellationToken);
+        => await mediator.Send(new GetSubscribedToQuery(userId ?? CurrentUserId), cancellationToken);
 }

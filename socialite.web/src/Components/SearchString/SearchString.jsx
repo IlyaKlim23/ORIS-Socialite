@@ -30,7 +30,7 @@ export default function SearchString(){
 
                         <nav className="text-sm font-medium text-black dark:text-white">
                             {
-                                users.map(x => <UserInfo userInfo={x}/>)
+                                users.map((x, index) => <UserInfo key={index} userInfo={x}/>)
                             }
                         </nav>
                     </div>

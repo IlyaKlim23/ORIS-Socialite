@@ -31,6 +31,11 @@
       <ProjectReference Include="..\Socialite.Api.Contracts\Socialite.Api.Contracts.csproj" />
       <ProjectReference Include="..\Socialite.Api.Db\Socialite.Api.Db.csproj" />
       <ProjectReference Include="..\Socialite.Api.S3\Socialite.Api.S3.csproj" />
+      <ProjectReference Include="..\Socialite.Api.SignalR\Socialite.Api.SignalR.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Providers\" />
     </ItemGroup>
 
 </Project>

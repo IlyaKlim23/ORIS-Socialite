@@ -22,6 +22,24 @@ namespace Socialite.Api.Db.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ChatUser", b =>
+                {
+                    b.Property<Guid>("ChatsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UsersId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("ChatsId", "UsersId");
+
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("user_chats", "public", t =>
+                        {
+                            t.HasComment("Пользователи-чаты");
+                        });
+                });
+
             modelBuilder.Entity("FilePost", b =>
                 {
                     b.Property<Guid>("FilesId")
@@ -153,6 +171,21 @@ namespace Socialite.Api.Db.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Socialite.Api.Core.Entities.Chat", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_in(md5(random()::text || clock_timestamp()::text)::cstring)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("chats", "public", t =>
+                        {
+                            t.HasComment("Чаты");
+                        });
+                });
+
             modelBuilder.Entity("Socialite.Api.Core.Entities.Comment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -219,6 +252,40 @@ namespace Socialite.Api.Db.Migrations
                     b.ToTable("files", "public", t =>
                         {
                             t.HasComment("Файлы");
+                        });
+                });
+
+            modelBuilder.Entity("Socialite.Api.Core.Entities.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("uuid_in(md5(random()::text || clock_timestamp()::text)::cstring)");
+
+                    b.Property<Guid>("ChatId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasComment("Дата и время создания");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasComment("Текст сообщения");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("messages", "public", t =>
+                        {
+                            t.HasComment("Сообщения");
                         });
                 });
 
@@ -392,6 +459,21 @@ namespace Socialite.Api.Db.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ChatUser", b =>
+                {
+                    b.HasOne("Socialite.Api.Core.Entities.Chat", null)
+                        .WithMany()
+                        .HasForeignKey("ChatsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Socialite.Api.Core.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("FilePost", b =>
                 {
                     b.HasOne("Socialite.Api.Core.Entities.File", null)
@@ -441,6 +523,25 @@ namespace Socialite.Api.Db.Migrations
                     b.Navigation("Post");
                 });
 
+            modelBuilder.Entity("Socialite.Api.Core.Entities.Message", b =>
+                {
+                    b.HasOne("Socialite.Api.Core.Entities.Chat", "Chat")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.HasOne("Socialite.Api.Core.Entities.User", "Owner")
+                        .WithMany("Messages")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.Navigation("Chat");
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Socialite.Api.Core.Entities.Post", b =>
                 {
                     b.HasOne("Socialite.Api.Core.Entities.User", "Owner")
@@ -477,6 +578,11 @@ namespace Socialite.Api.Db.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Socialite.Api.Core.Entities.Chat", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
             modelBuilder.Entity("Socialite.Api.Core.Entities.File", b =>
                 {
                     b.Navigation("Users");
@@ -492,6 +598,8 @@ namespace Socialite.Api.Db.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("CreatedPosts");
+
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

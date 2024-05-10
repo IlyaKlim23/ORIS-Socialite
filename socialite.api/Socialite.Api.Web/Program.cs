@@ -1,3 +1,4 @@
+using Socialite.Api.SignalR.Hubs;
 using Socialite.Api.Web.Constants;
 using Socialite.Api.Web.Extensions;
 
@@ -26,5 +27,6 @@ if (app.Environment.IsDevelopment())
 await app.MigrateDbAsync();
 
 app.MapControllers();
+app.MapHub<ChatHub>("/chat");
 
 app.Run();

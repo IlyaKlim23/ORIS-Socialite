@@ -9,10 +9,12 @@ import {ParseDateForPost} from "../../CommonServices/DateParser";
 import AddComment from "../../Api/Comments/AddComment";
 import GetComment from "../../Api/Comments/GetComments";
 
-function Post({postData, isCurrentUser, currentUserInfo}){
+function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
     const [avatar, setAvatar] = useState('')
     const [postFiles, setPostFiles] = useState([])
     const [comments, setComments] = useState([])
+    const [commentText, setCommentText] = useState('')
+    const isCurrent = isCurrentUser && !isFollowingPosts
 
     async function loadImages(){
         if (postData?.owner?.avatar?.fileId)
@@ -42,12 +44,12 @@ function Post({postData, isCurrentUser, currentUserInfo}){
     }
 
     async function onCommendAdd(){
-        const text = document.getElementById("post_comment_area").value
         const result = await AddComment({
-            text: text,
+            text: commentText,
             postId: postData.postId
         })
        if (result){
+           setCommentText('')
            document.getElementById("post_comment_area").value = ""
            await loadComments()
        }
@@ -66,18 +68,18 @@ function Post({postData, isCurrentUser, currentUserInfo}){
 
                 {/* post heading */}
                 <div className="flex gap-3 sm:p-4 p-2.5 text-sm font-medium">
-                    <a href={isCurrentUser ? profile : `${profile}/${postData?.owner?.userId}`}> <img
+                    <a href={isCurrent ? profile : `${profile}/${postData?.owner?.userId}`}> <img
                         src={avatar ? avatar : SmallAvatar} alt=""
                         className="w-9 h-9 rounded-full"/> </a>
                     <div className="flex-1">
-                        <a href={isCurrentUser ? profile : `${profile}/${postData?.owner?.userId}`}><h4
+                        <a href={isCurrent ? profile : `${profile}/${postData?.owner?.userId}`}><h4
                             className="text-black dark:text-white"> {postData?.owner?.firstName} {postData?.owner?.lastName}</h4>
                         </a>
                         <div
                             className="mt-0.5 text-xs text-gray-500 dark:text-white/60"> {ParseDateForPost(postData.createDate)}</div>
                     </div>
 
-                    {isCurrentUser
+                    {isCurrent
                         ? <div className="-mr-1">
                             <button type="button" className="button-icon w-8 h-8">
                                 <ion-icon className="text-xl" name="ellipsis-horizontal"></ion-icon>
@@ -107,11 +109,10 @@ function Post({postData, isCurrentUser, currentUserInfo}){
                            uk-slideshow="animation: push;ratio: 4:3">
 
                         <ul className="uk-slideshow-items overflow-hidden rounded-xl" uk-lightbox="animation: fade">
-                            {postFiles.map(x => {
-                                console.log(postFiles)
+                            {postFiles.map((x, index) => {
                                 return (
                                     <>
-                                        <li className="w-full">
+                                        <li className="w-full" key={index}>
                                             <img src={x} alt=""
                                                  className="w-full h-full absolute object-cover insta-0"/>
                                         </li>
@@ -162,8 +163,8 @@ function Post({postData, isCurrentUser, currentUserInfo}){
                             <ion-icon className="text-lg" name="chatbubble-ellipses"></ion-icon>
                         </button>
                         {
-                            postData.commentsCount > 0
-                                ? <span>{postData.commentsCount}</span>
+                            comments.length > 0
+                                ? <span>{comments.length}</span>
                                 : <></>
                         }
                     </div>
@@ -176,7 +177,7 @@ function Post({postData, isCurrentUser, currentUserInfo}){
                     ? <div
                         className="sm:p-4 p-2.5 border-t border-gray-100 font-normal space-y-3 relative dark:border-slate-700/40">
 
-                        {comments.map(x => <Comment commentData={x}/>)}
+                        {comments.map((x, index) => <Comment commentData={x} key={index}/>)}
 
                         {comments.length > 3
                             ? <button type="button"
@@ -198,27 +199,18 @@ function Post({postData, isCurrentUser, currentUserInfo}){
                     className="sm:px-4 sm:py-3 p-2.5 border-t border-gray-100 flex items-center gap-1 dark:border-slate-700/40">
 
                     <img src={
-                        !isCurrentUser
+                        !isCurrent
                             ? currentUserInfo?.avatar ? currentUserInfo?.avatar : SmallAvatar
                             : avatar ? avatar : SmallAvatar} alt=""
                          className="w-6 h-6 rounded-full"/>
 
                     <div className="flex-1 relative overflow-hidden h-10">
                                             <input type="text" placeholder="Ваш комментарий..."
-                                                      id="post_comment_area"
+                                                   onChange={e => setCommentText(e.target.value)}
+                                                   value={commentText}
+                                                   id="post_comment_area"
                                                       className="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent"></input>
 
-                        <div className="!top-2 pr-2" uk-drop="pos: bottom-right; mode: click">
-                            <div className="flex items-center gap-2"
-                                 uk-scrollspy="target: > svg; cls: uk-animation-slide-right-small; delay: 100 ;repeat: true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                     fill="currentColor" className="w-6 h-6 fill-sky-600">
-                                    <path fill-rule="evenodd"
-                                          d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                                          clip-rule="evenodd"/>
-                                </svg>
-                            </div>
-                        </div>
                     </div>
 
                     <button type="submit"

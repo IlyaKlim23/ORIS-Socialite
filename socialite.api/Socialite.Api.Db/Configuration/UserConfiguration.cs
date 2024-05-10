@@ -73,6 +73,12 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
             .HasPrincipalKey(x => x.Id)
             .OnDelete(DeleteBehavior.ClientCascade);
 
+        builder.HasMany(x => x.Messages)
+            .WithOne(x => x.Owner)
+            .HasForeignKey(x => x.OwnerId)
+            .HasPrincipalKey(x => x.Id)
+            .OnDelete(DeleteBehavior.ClientCascade);
+
         builder.HasMany(x => x.LikedPosts)
             .WithMany(x => x.LikedUsers)
             .UsingEntity(builder =>
@@ -84,5 +90,11 @@ internal class UserConfiguration: IEntityTypeConfiguration<User>
             .UsingEntity(builder =>
                 builder.ToTable("user_subscriber", "public")
                     .HasComment("Пользователь-Подписчик"));
+
+        builder.HasMany(x => x.Chats)
+            .WithMany(x => x.Users)
+            .UsingEntity(builder =>
+                builder.ToTable("user_chats", "public")
+                    .HasComment("Пользователи-чаты"));
     }
 }

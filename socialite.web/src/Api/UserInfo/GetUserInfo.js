@@ -5,6 +5,7 @@ export default async function GetUserInfo(userId) {
     let token = localStorage.getItem(authToken);
 
     let result;
+    let errorText = ""
     await userProfileClient
         .get('', {
             params:{
@@ -21,7 +22,10 @@ export default async function GetUserInfo(userId) {
             if (error?.response?.status === 401) {
                 localStorage.removeItem(authToken);
             }
+            errorText = error.response?.data?.title !== undefined
+                ? error.response.data.title
+                : "Не удалось получить ответ от сервера"
         });
 
-    return result;
+    return result ?? errorText;
 }

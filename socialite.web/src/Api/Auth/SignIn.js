@@ -13,10 +13,10 @@ export async function signIn(signInData) {
   await userClient
           .post("signIn", signInData)
           .then((result) => {
-              let token = result.data.jwtToken;
+              let token = result?.data?.jwtToken;
               localStorage.setItem(authToken, token);
-              localStorage.setItem(userIdItem, result.data.userId);
-              localStorage.setItem(userNameItem, result.data.userName);
+              localStorage.setItem(userIdItem, result?.data?.userId);
+              localStorage.setItem(userNameItem, result?.data?.userName);
               console.log(result);
               return ""
           })

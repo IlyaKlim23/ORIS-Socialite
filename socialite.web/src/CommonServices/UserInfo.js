@@ -9,9 +9,12 @@ export default async function UserInfoAsync(userId){
     const response = await GetUserInfo(userId);
     if (response?.data) {
         userData = response?.data;
-        if (response.data?.avatarId){
-            avatar = await DownloadFile(response.data.avatarId);
+        if (response?.data?.avatarId){
+            avatar = await DownloadFile(response?.data?.avatarId);
         }
+    }
+    else{
+        return response
     }
 
     return {

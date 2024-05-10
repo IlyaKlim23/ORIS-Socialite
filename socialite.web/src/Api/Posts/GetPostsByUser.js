@@ -1,14 +1,16 @@
 import {authToken} from "../../Constants/LocalStorageItemKeys";
 import {postsClient} from "../../Constants/AxiosClients";
 
-export default async function GetPostsByUser(userId){
+export default async function GetPostsByUser(userId, isFollowingPosts){
     let token = localStorage.getItem(authToken);
 
     let result
+    let errorText = ""
     await postsClient
         .get('', {
             params:{
-                userId
+                userId,
+                isFollowingPosts
             },
             headers:{
                 Authorization: `Bearer ${token}`
@@ -17,8 +19,10 @@ export default async function GetPostsByUser(userId){
             result = response;
         })
         .catch((error) => {
-            console.log(error);
+            errorText = error.response?.data?.title !== undefined
+                ? error.response.data.title
+                : "Не удалось получить ответ от сервера"
         });
 
-    return result
+    return result ?? errorText;
 }

@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Socialite.Api.Contracts.Requests.Subscribers.GetFriendsByUser;
 using Socialite.Api.Contracts.Requests.Subscribers.GetSubscribedTo;
 using Socialite.Api.Contracts.Requests.Subscribers.GetSubscribers;
 using Socialite.Api.Core.Constants;
+using Socialite.Api.Core.Requests.Subscribers.GetFriendsByUser;
 using Socialite.Api.Core.Requests.Subscribers.GetSubscribedTo;
 using Socialite.Api.Core.Requests.Subscribers.GetSubscribers;
 using Socialite.Api.Core.Requests.Subscribers.Subscribe;
@@ -53,6 +55,7 @@ public class SubscribersController : BaseController
     /// <param name="userId"></param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns></returns>
+    [Policy(PolicyConstants.IsDefaultUser)]
     [HttpGet("subscribers")]
     public async Task<GetSubscribersResponse> GetSubscribersAsync(
         [FromServices] IMediator mediator,
@@ -67,10 +70,26 @@ public class SubscribersController : BaseController
     /// <param name="userId"></param>
     /// <param name="cancellationToken">Токен отмены</param>
     /// <returns></returns>
+    [Policy(PolicyConstants.IsDefaultUser)]
     [HttpGet("subscriptions")]
     public async Task<GetSubscribedToResponse> GetSubscribedToAsync(
         [FromServices] IMediator mediator,
         [FromQuery] Guid? userId,
         CancellationToken cancellationToken)
         => await mediator.Send(new GetSubscribedToQuery(userId ?? CurrentUserId), cancellationToken);
+
+    /// <summary>
+    /// Получить друзей
+    /// </summary>
+    /// <param name="mediator"></param>
+    /// <param name="userId"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>-</returns>
+    [Policy(PolicyConstants.IsDefaultUser)]
+    [HttpGet("friends")]
+    public async Task<GetFriendsByUserResponse> GetFriendsAsync(
+        [FromServices] IMediator mediator,
+        [FromQuery] Guid? userId,
+        CancellationToken cancellationToken)
+        => await mediator.Send(new GetFriendsByUserQuery(userId ?? CurrentUserId), cancellationToken);
 }

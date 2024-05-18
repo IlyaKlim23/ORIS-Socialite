@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Minio;
 using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Interfaces;
 using Socialite.Api.Core.Services;

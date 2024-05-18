@@ -44,6 +44,11 @@ public class GetUserInfoResponse
     /// Семейное положение
     /// </summary>
     public string? MaritalStatus { get; set; }
+
+    /// <summary>
+    /// Кол-во постов
+    /// </summary>
+    public int PostsCount { get; set; }
     
     /// <summary>
     /// Статус

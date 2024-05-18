@@ -8,13 +8,18 @@ import RemovePost from "../../Api/Posts/RemovePost";
 import {ParseDateForPost} from "../../CommonServices/DateParser";
 import AddComment from "../../Api/Comments/AddComment";
 import GetComment from "../../Api/Comments/GetComments";
+import LikePost from "../../Api/Posts/LikePost";
+import DislikePost from "../../Api/Posts/DislikePost";
 
 function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
     const [avatar, setAvatar] = useState('')
     const [postFiles, setPostFiles] = useState([])
     const [comments, setComments] = useState([])
     const [commentText, setCommentText] = useState('')
+    const [likesCount, setLikesCount] = useState(0)
+    const [commentsCount, setCommentsCount] = useState(0)
     const isCurrent = isCurrentUser && !isFollowingPosts
+    const [isLiked, setIsLiked] = useState(false)
 
     async function loadImages(){
         if (postData?.owner?.avatar?.fileId)
@@ -52,17 +57,40 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
            setCommentText('')
            document.getElementById("post_comment_area").value = ""
            await loadComments()
+           setCommentsCount(commentsCount + 1)
        }
+    }
 
+    async function likePost(){
+        const result = await LikePost(postData.postId)
+        if (result)
+        {
+            setIsLiked(true)
+            setLikesCount(likesCount + 1)
+        }
+    }
+
+    async function dislikePost(){
+        const result = await DislikePost(postData.postId)
+        if (result)
+        {
+            setIsLiked(false)
+            setLikesCount(likesCount - 1)
+        }
     }
 
     useEffect(() => {
+        setCommentsCount(postData.commentsCount)
+        setLikesCount(postData.likesCount)
+        setIsLiked(postData.isLiked)
         loadImages().then()
         loadComments().then()
     }, []);
 
     return (
         <>
+            <div className="mt-3"></div>
+
             <div
                 className="bg-white rounded-xl shadow-sm text-sm font-medium border1 dark:bg-dark15">
 
@@ -97,7 +125,7 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
                                 </nav>
                             </div>
                         </div>
-                    : <></>}
+                        : <></>}
 
                 </div>
 
@@ -146,12 +174,15 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
                     <div>
                         <div className="flex items-center gap-2.5">
                             <button type="button"
-                                    className="button-icon text-red-500 bg-red-100 dark:bg-slate-700">
+                                    onClick={isLiked ? dislikePost : likePost}
+                                    className={isLiked
+                                        ? "button-icon text-red-500 dark:bg-slate-700"
+                                        : "button-icon dark:bg-slate-700"}>
                                 <ion-icon className="text-lg" name="heart"></ion-icon>
                             </button>
                             {
-                                postData.likesCount > 0
-                                    ? <a href="#">{postData.likesCount}</a>
+                                likesCount > 0
+                                    ? <span>{likesCount}</span>
                                     : <></>
                             }
                         </div>
@@ -163,8 +194,8 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
                             <ion-icon className="text-lg" name="chatbubble-ellipses"></ion-icon>
                         </button>
                         {
-                            comments.length > 0
-                                ? <span>{comments.length}</span>
+                            commentsCount > 0
+                                ? <span>{commentsCount}</span>
                                 : <></>
                         }
                     </div>
@@ -205,11 +236,11 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
                          className="w-6 h-6 rounded-full"/>
 
                     <div className="flex-1 relative overflow-hidden h-10">
-                                            <input type="text" placeholder="Ваш комментарий..."
-                                                   onChange={e => setCommentText(e.target.value)}
-                                                   value={commentText}
-                                                   id="post_comment_area"
-                                                      className="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent"></input>
+                        <input type="text" placeholder="Ваш комментарий..."
+                               onChange={e => setCommentText(e.target.value)}
+                               value={commentText}
+                               id="post_comment_area"
+                               className="w-full resize-none !bg-transparent px-4 py-2 focus:!border-transparent focus:!ring-transparent"></input>
 
                     </div>
 

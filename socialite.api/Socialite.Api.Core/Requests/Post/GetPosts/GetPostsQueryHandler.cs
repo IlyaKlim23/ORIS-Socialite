@@ -30,12 +30,10 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
         List<Guid>? subscribedUserIds = null;
         
         if (request.IsFollowingPosts)
-        {
             subscribedUserIds = await _userService.Users()
                 .Where(x => x.Subscribers.Select(x => x.Id).Contains(request.UserId))
                 .Select(x => x.Id)
                 .ToListAsync(cancellationToken);
-        }
         
         var query = subscribedUserIds == null
             ? _dbContext.Posts.Where(x => x.OwnerId == request.UserId)
@@ -67,9 +65,12 @@ public class GetPostsQueryHandler : IRequestHandler<GetPostsQuery, GetPostsRespo
                     FileId = y.Id,
                     Name = y.Name,
                 }).ToList(),
-                CommentsCount = x.Comments!.Count
+                CommentsCount = x.Comments!.Count,
+                IsLiked = x.LikedUsers.Select(x => x.Id).Contains(request.CurrentUserId),
             })
             .OrderByDescending(x => x.CreateDate)
+            .Skip((request.Pagination.PageNumber - 1) * request.Pagination.PageSize)
+            .Take(request.Pagination.PageSize)
             .ToListAsync(cancellationToken);
 
         var count = await query.CountAsync(cancellationToken);

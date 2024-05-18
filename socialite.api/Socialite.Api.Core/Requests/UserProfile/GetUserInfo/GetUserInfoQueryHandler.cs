@@ -32,6 +32,7 @@ public class GetUserInfoQueryHandler : IRequestHandler<GetUserInfoQuery, GetUser
                 SubscribersCount = x.Subscribers.Count,
                 SubscriberToCount = x.SubscribedTo.Count,
                 FriendsCount = x.Subscribers.Intersect(x.SubscribedTo).Count(),
+                PostsCount = x.CreatedPosts.Count,
                 User = x,
                 IsSubscribedTo = x.Subscribers.Select(y => y.Id).Contains(request.CurrentUserId),
                 IsSubscriber = x.SubscribedTo.Select(y => y.Id).Contains(request.CurrentUserId)
@@ -47,6 +48,7 @@ public class GetUserInfoQueryHandler : IRequestHandler<GetUserInfoQuery, GetUser
             LastName = userInfo.User.LastName,
             PlaceOfLiving = userInfo.User.PlaceOfLiving,
             PlaceOfWork = userInfo.User.PlaceOfWork,
+            PostsCount = userInfo.PostsCount,
             PlaceOfStudy = userInfo.User.PlaceOfStudy,
             MaritalStatus = userInfo.User.MaritalStatus?.GetDescription(),
             Status = userInfo.User.Status,

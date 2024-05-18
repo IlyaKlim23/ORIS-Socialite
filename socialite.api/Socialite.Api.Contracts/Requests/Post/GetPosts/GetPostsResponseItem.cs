@@ -39,4 +39,9 @@ public class GetPostsResponseItem
     /// Кол-во комментариев
     /// </summary>
     public int CommentsCount { get; set; }
+
+    /// <summary>
+    /// Есть лайк
+    /// </summary>
+    public bool IsLiked { get; set; }
 }

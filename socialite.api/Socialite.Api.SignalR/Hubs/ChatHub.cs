@@ -1,39 +1,39 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using Socialite.Api.SignalR.Interfaces;
 using Socialite.Api.SignalR.Models;
 
 namespace Socialite.Api.SignalR.Hubs;
 
-[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+/// <summary>
+/// Хаб чата
+/// </summary>
 public class ChatHub : Hub<IChatClient>
 {
-    public async Task Register()
-    {
-        await Clients.All.ReceiveMessage("Этот пидр нажал на кнопку");
-    }
-    
+    /// <summary>
+    /// Присоединиться в чат
+    /// </summary>
+    /// <param name="chatConnection">Модель подключения к чату</param>
     public async Task JoinChat(ChatConnection chatConnection)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, chatConnection.ChatId.ToString());
-        
-        await Clients
-            .Group(chatConnection.ChatId.ToString())
-            .ReceiveMessage("Здрасьте забор покрасьте");
     }
 
-    public async Task SuggestAChat(ChatConnection chatConnection)
+    /// <summary>
+    /// Присоединиться в чаты
+    /// </summary>
+    /// <param name="chatConnections">Модель подключения к множеству чатов</param>
+    public async Task JoinAllChats(ChatConnections chatConnections)
     {
-        await Clients.User("ilklmkn").ReceiveMessage("Вам предложили чат)");
+        foreach (var chatId in chatConnections.ChatIds)
+            await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
     }
 
-    public override Task OnConnectedAsync()
-    {
-        string name = Context.User.Identity.Name;
-
-        Groups.AddToGroupAsync(Context.ConnectionId, name);
-
-        return base.OnConnectedAsync();
-    }
+    /// <summary>
+    /// Отправить сообщение в чат
+    /// </summary>
+    /// <param name="sendMessageToChatModel"></param>
+    public async Task SendMessageToChat(SendMessageToChatModel sendMessageToChatModel)
+    => await Clients
+        .GroupExcept(sendMessageToChatModel.ChatId.ToString(), Context.ConnectionId)
+        .ReceiveMessage(new MessageModel(sendMessageToChatModel.ChatId, false, sendMessageToChatModel.Message));
 }

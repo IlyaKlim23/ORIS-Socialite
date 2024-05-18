@@ -36,6 +36,7 @@ public class GetCommentsQueryHandler : IRequestHandler<GetCommentsQuery, GetComm
                 }
             })
             .Take(request.Request.Count)
+            .OrderBy(x => x.CreatedDate)
             .ToListAsync(cancellationToken);
 
         return new GetCommentsResponse(comments, comments.Count);

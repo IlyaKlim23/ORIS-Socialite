@@ -1,4 +1,7 @@
-﻿namespace Socialite.Api.SignalR.Interfaces;
+﻿using Socialite.Api.Core.Entities;
+using Socialite.Api.SignalR.Models;
+
+namespace Socialite.Api.SignalR.Interfaces;
 
 /// <summary>
 /// Клиент для работы с чатом
@@ -10,6 +13,6 @@ public interface IChatClient
     /// </summary>
     /// <param name="message"></param>
     /// <returns></returns>
-    public Task ReceiveMessage(string message);
+    public Task ReceiveMessage(MessageModel message);
 }
 

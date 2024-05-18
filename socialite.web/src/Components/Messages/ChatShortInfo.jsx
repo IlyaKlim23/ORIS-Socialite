@@ -1,10 +1,15 @@
 import {useEffect, useState} from "react";
 import DownloadFile from "../../Api/StaticFiles/DownloadFile";
 import {SmallAvatar} from "../../Constants/Images/Avatars";
+import SignalRConnection from "../../Stores/SignalRConnection";
+import signalRConnection from "../../Stores/SignalRConnection";
+import {receiveMessage} from "../../Constants/ChatMethods";
+import TrimMessage from "../../CommonServices/MessageSplitter";
 
 
 export default function ChatShortInfo({info}){
     const [avatar, setAvatar] = useState('')
+    const [lastMessage, setLastMessage] = useState()
 
     async function loadAvatar(){
         const result = await DownloadFile(info.avatarId)
@@ -14,6 +19,14 @@ export default function ChatShortInfo({info}){
 
     useEffect(() => {
         if (info.avatarId) loadAvatar().then()
+        SignalRConnection.refreshConnection()
+            .then(() => {
+                signalRConnection.connection.on(receiveMessage, (message) => {
+                    if (message.chatId === info.chatId)
+                        setLastMessage(message)
+                })
+            })
+
     }, []);
 
     return (
@@ -34,7 +47,7 @@ export default function ChatShortInfo({info}){
                         </div>
                     </div>
                     <div
-                        className="font-medium overflow-hidden text-ellipsis text-sm text-gray-400">{info.lastMessageText}
+                        className="font-medium overflow-hidden text-ellipsis text-sm text-gray-400">{TrimMessage(lastMessage?.text ?? info.lastMessageText)}
                     </div>
                 </div>
             </a>

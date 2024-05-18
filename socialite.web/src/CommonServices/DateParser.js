@@ -1,6 +1,9 @@
 
 
 export function ParseDateForPost(date){
+    if (date === undefined)
+        return ""
+
     const dateObj = new Date(date);
     const options = {
         year: "numeric",
@@ -16,6 +19,8 @@ export function ParseDateForPost(date){
 }
 
 export function ParseDateForComment(date){
+    if (date === undefined)
+        return ""
     const dateObj = new Date(date);
     const options = {
         year: "numeric",

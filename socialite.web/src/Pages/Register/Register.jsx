@@ -51,9 +51,9 @@ export default function Register(){
                         </div>
 
                         <div>
-                            <h2 className="text-2xl font-semibold mb-1.5"> Sign up to get started </h2>
-                            <p className="text-sm text-gray-700 font-normal">If you already have an account, <a
-                                href={signIn} className="text-blue-700">Login here!</a></p>
+                            <h2 className="text-2xl font-semibold mb-1.5"> Войдите чтобы начать </h2>
+                            <p className="text-sm text-gray-700 font-normal">Есть аккаунт? <a
+                                href={signIn} className="text-blue-700">Войти</a></p>
                         </div>
 
 
@@ -63,9 +63,9 @@ export default function Register(){
                             <div className="grid grid-cols-2 gap-4 gap-y-7">
 
                                 <div className="col-span-2">
-                                    <label htmlFor="email" className="">Username</label>
+                                    <label htmlFor="email" className="">Никнейм</label>
                                     <div className="mt-2.5">
-                                        <input name="userName" type="text" autoFocus="" placeholder="Username"
+                                        <input name="userName" type="text" autoFocus="" placeholder="Никнейм"
                                                value={registrationData.userName}
                                                onChange={handleInputChange}
                                                required=""
@@ -74,9 +74,9 @@ export default function Register(){
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="">First name</label>
+                                    <label htmlFor="email" className="">Имя</label>
                                     <div className="mt-2.5">
-                                        <input name="firstName" type="text" autoFocus="" placeholder="First name"
+                                        <input name="firstName" type="text" autoFocus="" placeholder="Имя"
                                                required=""
                                                value={registrationData.firstName}
                                                onChange={handleInputChange}
@@ -85,9 +85,9 @@ export default function Register(){
                                 </div>
 
                                 <div>
-                                    <label htmlFor="email" className="">Last name</label>
+                                    <label htmlFor="email" className="">Фамилия</label>
                                     <div className="mt-2.5">
-                                        <input name="lastName" type="text" placeholder="Last name" required=""
+                                        <input name="lastName" type="text" placeholder="Фамилия" required=""
                                                value={registrationData.lastName}
                                                onChange={handleInputChange}
                                                className="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"/>
@@ -95,9 +95,9 @@ export default function Register(){
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label htmlFor="email" className="">Email address</label>
+                                    <label htmlFor="email" className="">Почта</label>
                                     <div className="mt-2.5">
-                                        <input id="email" name="email" type="email" placeholder="Email" required=""
+                                        <input id="email" name="email" type="email" placeholder="Почта" required=""
                                                value={registrationData.email}
                                                onChange={handleInputChange}
                                                className="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"/>
@@ -105,9 +105,9 @@ export default function Register(){
                                 </div>
 
                                 <div className="col-span-2">
-                                    <label htmlFor="email" className="">Password</label>
+                                    <label htmlFor="email" className="">Пароль</label>
                                     <div className="mt-2.5">
-                                        <input id="password" name="password" type="password" placeholder="Password"
+                                        <input id="password" name="password" type="password" placeholder="Пароль"
                                                value={registrationData.password}
                                                onChange={handleInputChange}
                                                className="!w-full !rounded-lg !bg-transparent !shadow-sm !border-slate-200 dark:!border-slate-800 dark:!bg-white/5"/>
@@ -116,7 +116,7 @@ export default function Register(){
 
                                 <div className="col-span-2">
                                     <button type="button" onClick={onRegistrationSubmit}
-                                            className="button bg-primary text-white w-full">Get Started
+                                            className="button bg-primary text-white w-full">Начать
                                     </button>
                                 </div>
                                 <div className="col-span-2">{AlertError(textForAlert)}</div>
@@ -141,11 +141,9 @@ export default function Register(){
                                 <div className="max-w-xl w-full mx-auto pb-32 px-5 z-30 relative"
                                          uk-scrollspy="target: > *; cls: uk-animation-scale-up; delay: 100 ;repeat: true">
                                         <h4 className="!text-white text-2xl font-semibold mt-7"
-                                            uk-slideshow-parallax="y: 600,0,0"> Connect With Friends </h4>
+                                            uk-slideshow-parallax="y: 600,0,0"> Общайся с друзьями </h4>
                                         <p className="!text-white text-lg mt-7 leading-8"
-                                           uk-slideshow-parallax="y: 800,0,0;"> This phrase is more casual and playful.
-                                            It suggests that you are keeping your friends updated on what’s happening in
-                                            your life.</p>
+                                           uk-slideshow-parallax="y: 800,0,0;"> Держите своих друзей в курсе всего, что происходит в вашей жизни.</p>
                                     </div>
                                 </div>
                                 <div className="w-full h-96 bg-gradient-to-t from-black absolute bottom-0 left-0"></div>

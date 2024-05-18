@@ -1,16 +1,21 @@
 import {authToken} from "../../Constants/LocalStorageItemKeys";
 import {postsClient} from "../../Constants/AxiosClients";
 
-export default async function GetPostsByUser(userId, isFollowingPosts){
+export default async function GetPostsByUser(userId, isFollowingPosts, pageNumber){
     let token = localStorage.getItem(authToken);
+
+    let pagination = {
+        pageNumber: pageNumber,
+        pageSize: 5
+    }
 
     let result
     let errorText = ""
     await postsClient
-        .get('', {
+        .post('getPosts', pagination, {
             params:{
                 userId,
-                isFollowingPosts
+                isFollowingPosts,
             },
             headers:{
                 Authorization: `Bearer ${token}`

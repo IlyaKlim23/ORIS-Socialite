@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import processRegistration from "./RegistrationService";
 import {feed} from "../../Constants/PagePaths"
 import {AlertError} from "../../Components/AlertError";
+import Loader from "../../Components/Loader";
 
 export default function Register(){
     const [registrationData, setRegistrationData] = useState({
@@ -13,6 +14,8 @@ export default function Register(){
         email: "",
         password: "",
     });
+    const [loading, setLoading] = useState(false);
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,11 +30,14 @@ export default function Register(){
     const navigate = useNavigate();
     async function onRegistrationSubmit(event) {
         event.preventDefault();
+        setLoading(true)
+
         errorText = await processRegistration(registrationData)
         if (errorText === ""){
             navigate(feed)
         }
         else{
+            setLoading(false)
             setTextForAlert(errorText)
         }
 
@@ -39,6 +45,8 @@ export default function Register(){
 
     return(
         <>
+            {loading && <Loader loading={loading} /> }
+
             <div className="sm:flex">
                 <div
                     className="relative lg:w-[580px] md:w-96 w-full p-10 min-h-screen bg-white shadow-xl flex items-center pt-10 dark:bg-slate-900 z-10">

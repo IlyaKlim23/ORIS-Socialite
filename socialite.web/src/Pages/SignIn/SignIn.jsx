@@ -3,29 +3,35 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {processSignIn} from "./SignInService";
 import {AlertError} from "../../Components/AlertError";
-import {feed} from "../../Constants/PagePaths"
+import {feed} from "../../Constants/PagePaths";
+import Loader from "../../Components/Loader";
 
 export default function SignIn() {
     const [signInData, setSignInData] = useState({
         email: "",
         password: "",
     });
+    const [loading, setLoading] = useState(false);
     let errorText = "";
     const [textForAlert, setTextForAlert] = useState("")
     const navigate = useNavigate();
     async function onFormSubmit(event) {
         event.preventDefault();
+        setLoading(true)
         errorText = await processSignIn(signInData)
         if (errorText === ""){
             navigate(feed)
         }
         else{
+            setLoading(false)
             setTextForAlert(errorText)
         }
     }
 
     return(
         <>
+            {loading && <Loader loading={loading} /> }
+
             <div className="sm:flex">
                 <div
                     className="relative lg:w-[580px] md:w-96 w-full p-10 min-h-screen bg-white shadow-xl flex items-center pt-10 dark:bg-slate-900 z-10">

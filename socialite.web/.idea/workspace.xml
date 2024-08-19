@@ -5,40 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a761852c-1160-430c-8135-9f5ae6750684" name="Changes" comment="[WEB/API] bugfix">
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/Post/GetPosts/GetPostsResponseItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Contracts/Requests/Post/GetPosts/GetPostsResponseItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Comments/GetComments/GetCommentsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Comments/GetComments/GetCommentsQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Core/Requests/Post/GetPosts/GetPostsQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Hubs/ChatHub.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Hubs/ChatHub.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Interfaces/IChatClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Interfaces/IChatClient.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Models/ChatConnection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.SignalR/Models/ChatConnection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/ChatController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/ChatController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/PostsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Controllers/PostsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Extensions/WebApplicationBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../socialite.api/Socialite.Api.Web/Extensions/WebApplicationBuilderExtensions.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/tailwind.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/tailwind.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Auth/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Auth/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Chat/JoinChat.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Posts/GetPostsByUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Posts/GetPostsByUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommonServices/DateParser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommonServices/DateParser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Messages/Chat.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Messages/Chat.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Messages/ChatShortInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Messages/ChatShortInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Posts/Post.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Posts/Post.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Posts/Posts.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Posts/Posts.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SearchString/SearchString.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SearchString/SearchString.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Sidebar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Sidebar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Constants/ChatMethods.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constants/ChatMethods.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Feed/Feed.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pages/Messages/Messages.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Messages/Messages.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/form-login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/form-register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/funding.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/setting.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/single.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/timeline-page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/upgrade.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Styles/componentStyles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Styles/componentStyles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Profile/Profile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/Register/Register.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/Register/Register.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pages/SignIn/SignIn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pages/SignIn/SignIn.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +38,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "IlyaKlim23"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/IlyaKlim23/ORIS-Socialite.git",
+    "accountId": "5591eabd-6aec-4ff0-9c02-82d8cdc8437d"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -73,26 +65,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/ORIS-Socialite/socialite.web&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.npm start.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\klimk\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/ORIS-Socialite/socialite.web",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.npm start.executor": "Run",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\klimk\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\ORIS-Socialite\socialite.web\src\Sources\Images\Avatars" />
@@ -123,6 +115,13 @@
       <envs />
       <method v="2" />
     </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -186,6 +185,7 @@
       <workItem from="1715849770030" duration="10683000" />
       <workItem from="1715868556816" duration="6961000" />
       <workItem from="1716013006403" duration="13865000" />
+      <workItem from="1724046320336" duration="5478000" />
     </task>
     <task id="LOCAL-00001" summary="[WEB] auth">
       <option name="closed" value="true" />

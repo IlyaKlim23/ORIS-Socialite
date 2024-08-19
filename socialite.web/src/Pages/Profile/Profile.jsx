@@ -18,6 +18,7 @@ import {messages} from "../../Constants/PagePaths";
 import GetFriends from "../../Api/SubscribeSystem/GetFriends";
 import FriendInfo from "../../Components/Profile/FriendInfo";
 import {userIdItem} from "../../Constants/LocalStorageItemKeys";
+import Loader from "../../Components/Loader";
 
 const Profile = observer(() => {
     const userId = useParams().userId
@@ -28,14 +29,19 @@ const Profile = observer(() => {
     const [errorMessage, setErrorMessage] = useState('')
     const [showPosts, setShowPosts] = useState(true)
     const [friends, setFriends] = useState([])
+    const [loading, setLoading] = useState(false);
 
     async function loadProfile(){
+        setLoading(true)
         const result = await UserInfoAsync(userId)
-        if (typeof result === 'string')
+        if (typeof result === 'string'){
             setErrorMessage(result)
+            setLoading(false)
+        }
         else {
             setUserData(result?.userData)
             setAvatar(result?.avatar)
+            setLoading(false)
         }
     }
 
@@ -162,6 +168,7 @@ const Profile = observer(() => {
 
     return (
         <>
+            {loading && <Loader loading={loading} /> }
 
             <div onClick={() => {setErrorMessage('')}}>
                 <ErrorToast message={errorMessage}/>

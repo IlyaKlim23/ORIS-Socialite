@@ -1,4 +1,4 @@
-﻿namespace Socialite.Api.Contracts.Requests.Comments.GetComments;
+﻿namespace Socialite.Api.Contracts.Requests.Comments;
 
 public class GetCommentsResponseItem
 {

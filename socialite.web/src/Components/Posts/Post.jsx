@@ -20,6 +20,7 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
     const [commentsCount, setCommentsCount] = useState(0)
     const isCurrent = isCurrentUser && !isFollowingPosts
     const [isLiked, setIsLiked] = useState(false)
+    const [commentsBucketNumber, setCommentsBucketNumber] = useState(1)
 
     async function loadImages(){
         if (postData?.owner?.avatar?.fileId)
@@ -42,9 +43,17 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
     }
 
     async function loadComments(){
-        const result = await GetComment(postData.postId)
+        const result = await GetComment(postData.postId, 1)
         if (result){
             setComments(result?.data?.items)
+        }
+    }
+
+    async function updateComments(){
+        const result = await GetComment(postData.postId, commentsBucketNumber + 1)
+        if (result){
+            setCommentsBucketNumber(prev => prev + 1)
+            setComments([...comments, ...result?.data?.items])
         }
     }
 
@@ -56,7 +65,8 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
        if (result){
            setCommentText('')
            document.getElementById("post_comment_area").value = ""
-           await loadComments()
+           console.log(result?.data?.item)
+           setComments(comments => [...comments, result?.data?.item])
            setCommentsCount(commentsCount + 1)
        }
     }
@@ -210,12 +220,14 @@ function Post({postData, isCurrentUser, currentUserInfo, isFollowingPosts}){
 
                         {comments.map((x, index) => <Comment commentData={x} key={index}/>)}
 
-                        {comments.length > 3
-                            ? <button type="button"
-                                      className="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
+                        {comments.length < commentsCount
+                            ? <button
+                                onClick={() => updateComments()}
+                                type="button"
+                                className="flex items-center gap-1.5 text-gray-500 hover:text-blue-500 mt-2">
                                 <ion-icon name="chevron-down-outline"
                                           className="ml-auto duration-200 group-aria-expanded:rotate-180"></ion-icon>
-                                More Comment
+                                Больше комментариев
                             </button>
                             : <></>}
 

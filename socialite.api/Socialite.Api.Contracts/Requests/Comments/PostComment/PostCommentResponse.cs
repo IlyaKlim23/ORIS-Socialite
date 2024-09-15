@@ -8,14 +8,14 @@ public class PostCommentResponse
     /// <summary>
     /// Конструктор
     /// </summary>
-    /// <param name="commentId">Идентификатор комментария</param>
-    public PostCommentResponse(Guid commentId)
+    /// <param name="item">Идентификатор комментария</param>
+    public PostCommentResponse(GetCommentsResponseItem item)
     {
-        CommentId = commentId;
+        Item = item;
     }
 
     /// <summary>
-    /// Идентификатор комментария
+    /// Созданная сущность
     /// </summary>
-    public Guid CommentId { get; set; }
+    public GetCommentsResponseItem Item { get; set; }
 }

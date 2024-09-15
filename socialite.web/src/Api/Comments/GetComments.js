@@ -2,10 +2,11 @@ import {authToken} from "../../Constants/LocalStorageItemKeys";
 import {commentsClient} from "../../Constants/AxiosClients";
 
 
-export default async function GetComment(postId){
+export default async function GetComment(postId, bucketNumber){
     const token = localStorage.getItem(authToken)
     const data = {
-        count: 5
+        count: 5,
+        bucketNumber: bucketNumber,
     }
 
     let result

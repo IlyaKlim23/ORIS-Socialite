@@ -51,7 +51,12 @@ public static class WebApplicationBuilderExtensions
     public static void ConfigureCore(this WebApplicationBuilder builder)
     {
         builder.Services.AddMediatR(typeof(EntityBase).Assembly);
-        
+
+        builder.Services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = builder.Configuration["RedisCacheOptions:Configuration"];
+            options.InstanceName = builder.Configuration["RedisCacheOptions:InstanceName"];
+        });
         builder.Services.AddScoped<IDbContext, EfContext>();
         builder.Services.AddScoped<IUserService, UserService>();
         builder.Services.AddSingleton<IJwtService, JwtService>();

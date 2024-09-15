@@ -7,6 +7,7 @@
         <InvariantGlobalization>true</InvariantGlobalization>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <UserSecretsId>eb5f51a6-2c68-4abf-b6be-de9c6c862557</UserSecretsId>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -22,6 +23,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.0" />
         <PackageReference Include="Minio" Version="6.0.2" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
@@ -36,6 +38,12 @@
 
     <ItemGroup>
       <Folder Include="Providers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
     </ItemGroup>
 
 </Project>

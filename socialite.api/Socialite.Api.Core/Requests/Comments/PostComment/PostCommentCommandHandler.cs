@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Socialite.Api.Contracts.Requests.Comments;
 using Socialite.Api.Contracts.Requests.Comments.PostComment;
 using Socialite.Api.Core.Entities;
 using Socialite.Api.Core.Exceptions;
@@ -47,7 +48,20 @@ public class PostCommentCommandHandler : IRequestHandler<PostCommentCommand, Pos
         _dbContext.Comments.Add(comment);
 
         await _dbContext.SaveChangesAsync(cancellationToken);
-
-        return new PostCommentResponse(comment.Id);
+        
+        return new PostCommentResponse(new GetCommentsResponseItem
+        {
+            CommentId = comment.Id,
+            Text = comment.Text,
+            CreatedDate = comment.CreateDate,
+            Owner = new GetCommentsResponseUser
+            {
+                UserId = user.Id,
+                AvatarId = user.AvatarId,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName
+            }
+        });
     }
 }

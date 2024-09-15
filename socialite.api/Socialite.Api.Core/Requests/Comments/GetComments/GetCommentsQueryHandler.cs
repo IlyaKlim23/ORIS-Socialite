@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Socialite.Api.Contracts.Requests.Comments;
 using Socialite.Api.Contracts.Requests.Comments.GetComments;
 using Socialite.Api.Core.Interfaces;
 
@@ -19,14 +20,18 @@ public class GetCommentsQueryHandler : IRequestHandler<GetCommentsQuery, GetComm
 
     public async Task<GetCommentsResponse> Handle(GetCommentsQuery request, CancellationToken cancellationToken)
     {
-        var comments = await _dbContext.Comments
-            .Where(x => x.PostId == request.PostId)
-            .Select(x => new GetCommentsResponseItem()
+        var query = _dbContext.Comments
+            .Where(x => x.PostId == request.PostId);
+
+        var totalCount = await query.CountAsync(cancellationToken);
+        
+        var comments = await query
+            .Select(x => new GetCommentsResponseItem
             {
                 CommentId = x.Id,
                 Text = x.Text,
                 CreatedDate = x.CreateDate,
-                Owner = new GetCommentsResponseUser()
+                Owner = new GetCommentsResponseUser
                 {
                     UserId = x.OwnerId,
                     AvatarId = x.Owner.AvatarId,
@@ -35,10 +40,11 @@ public class GetCommentsQueryHandler : IRequestHandler<GetCommentsQuery, GetComm
                     LastName = x.Owner.LastName
                 }
             })
+            .Skip((request.Request.BucketNumber - 1) * request.Request.Count)
             .Take(request.Request.Count)
             .OrderBy(x => x.CreatedDate)
             .ToListAsync(cancellationToken);
 
-        return new GetCommentsResponse(comments, comments.Count);
+        return new GetCommentsResponse(comments, totalCount);
     }
 }

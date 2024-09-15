@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Options;
 using Socialite.Api.Core.Exceptions;
+using StackExchange.Redis;
 
 namespace Socialite.Api.Web.Middlewares;
 
@@ -56,6 +57,10 @@ public class ExceptionHandlingMiddleware
         catch (UnauthorizedAccessException ex)
         {
             await HandleUnauthorizedAccessExceptionAsync(context, ex);
+        }
+        catch (RedisConnectionException ex)
+        {
+            await HandleRedisConnectionExceptionAsync(context, ex);
         }
         catch (Exception ex)
         {
@@ -165,6 +170,20 @@ public class ExceptionHandlingMiddleware
     {
         var errorText =
             $"Server has troubles with its infrastructure. Please inform system administrator about this issue.";
+        var logLevel = LogLevel.Error;
+        var responseCode = HttpStatusCode.InternalServerError;
+        await LogAndReturnAsync(context, exception, errorText, responseCode, logLevel);
+    }
+
+    /// <summary>
+    /// Обработка исключения <see cref="OutOfMemoryException"/>
+    /// </summary>
+    /// <param name="context">Контекст запроса ASP.NET</param>
+    /// <param name="exception">Исключение</param>
+    /// <returns>Задача на обработку запроса ASP.NET</returns>
+    private async Task HandleRedisConnectionExceptionAsync(HttpContext context, RedisConnectionException exception)
+    {
+        var errorText = "Невозможно получить ответ от Redis";
         var logLevel = LogLevel.Error;
         var responseCode = HttpStatusCode.InternalServerError;
         await LogAndReturnAsync(context, exception, errorText, responseCode, logLevel);
